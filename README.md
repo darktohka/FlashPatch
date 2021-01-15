@@ -28,14 +28,14 @@ Adobe ships a current version of the Flash Player projector without the killswit
 
 ## Usage
 
-- Extract `FlashPlayer.exe` into a new folder.
-- Run `FlashPlayer.exe` and allow it to run as administrator (necessary to change system Flash Player files)
+- Extract `FlashPatch.exe` into a new folder.
+- Run `FlashPatch.exe` and allow it to run as administrator (necessary to change system Flash Player files)
 - Press the "Patch" button and agree to the warning message
 - Your Flash Player is now usable once again!
 
 To restore the old, unpatched binaries:
 
 - The unpatched binaries are saved into a `Backup` folder when you patch Flash Player
-- Run `FlashPlayer.exe` and allow it to run as administrator (necessary to change system Flash Player files)
+- Run `FlashPatch.exe` and allow it to run as administrator (necessary to change system Flash Player files)
 - Press the "Restore" button and agree
 - Your Flash Player is now back to its factory defaults.
