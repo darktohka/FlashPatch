@@ -1,0 +1,33 @@
+name: Build FlashPatch
+
+on:
+  push:
+    branches: master
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Visual Studio
+        uses: ilammy/msvc-dev-cmd@v1
+      - name: Import certificate
+        shell: bash
+        run: >
+          echo ${{ secrets.SIGN_WIN_CERT }} | base64 --decode > cert.pfx &&
+          powershell //C "\$Password = ConvertTo-SecureString ${{ secrets.SIGN_WIN_PASS }} -AsPlainText -Force; echo \$Password; Import-PfxCertificate -FilePath cert.pfx -CertStoreLocation Cert:\LocalMachine\My -Password \$Password"
+      - name: Build executable
+        shell: powershell
+        working-directory: FlashPatch
+        run: >
+          msbuild /p:Configuration=Release /p:Platform=x86 /p:OutputPath=bin FlashPatch.csproj
+      - name: Sign executable
+        shell: powershell
+        working-directory: FlashPatch/bin
+        run: >
+          signtool sign /a /sm /tr "${{ secrets.SIGN_WIN_TIMESTAMP }}" /td sha256 /fd sha256 FlashPatch.exe
+      - uses: actions/upload-artifact@v2
+        with:
+          name: FlashPatch
+          path: FlashPatch/bin/FlashPatch.exe
