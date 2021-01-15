@@ -180,7 +180,7 @@ namespace FlashPatch {
         }
 
         public static void PatchAll() {
-            if (MessageBox.Show("Are you sure you want to patch your system-wide Flash plugins to remove the January 12nd, 2021 killswitch and allow Flash games to be played in your browser?", "FlashPatch!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) {
+            if (MessageBox.Show("Are you sure you want to patch your system-wide Flash plugins to remove the January 12st, 2021 killswitch and allow Flash games to be played in your browser?", "FlashPatch!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) {
                 return;
             }
 
