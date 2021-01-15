@@ -24,8 +24,11 @@ namespace FlashPatch {
                     0x2676F0,
                     new byte[] { 0x48, 0x89, 0x5C, 0x24, 0x18, 0x48, 0x89, 0x6C, 0x24, 0x20 },
                     new byte[] { 0xB8, 0x00, 0x00, 0x00, 0x00, 0xC3, 0x90, 0x90, 0x90, 0x90 }
-                )
-            }),
+                )},
+                new List<string>() {
+                    Path.Combine(GetLocalAppdata(), "Google", "Chrome", "User Data", "PepperFlash", "32.0.0.465", "pepflashplayer.dll"),
+                    Path.Combine(GetLocalAppdata(), "Microsoft", "Edge", "User Data", "PepperFlash", "32.0.0.465", "pepflashplayer.dll")
+                }),
             new PatchableBinary(
                 "Firefox 64-bit Plugin (NPAPI)", "NPSWF64_32_0_0_465.dll", "32,0,0,465", true, 26911800, new List<HexPatch>() {
                 new HexPatch(
@@ -118,6 +121,10 @@ namespace FlashPatch {
 
         private static string GetWindowsDir() {
             return Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+        }
+
+        private static string GetLocalAppdata() {
+            return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         }
 
         private static string GetFlashDir32() {
@@ -226,68 +233,78 @@ namespace FlashPatch {
                 }
 
                 string name = binary.GetName();
-                string path = Path.Combine(binaryX64 ? flashDir64 : flashDir32, binary.GetFileName());
+                List<string> paths = new List<string>();
 
-                if (!File.Exists(path)) {
-                    // The plugin does not exist on the drive.
-                    notFound.Add(name);
-                    continue;
-                }
+                paths.Add(Path.Combine(binaryX64 ? flashDir64 : flashDir32, binary.GetFileName()));
+                paths.AddRange(binary.GetAlternatePaths());
 
-                string version = GetVersion(path);
+                bool found = false;
 
-                if (!binary.GetVersion().Equals(version)) {
-                    // We've encountered an incompatible version.
-                    incompatibleVersion.Add(string.Format("{0} ({1})", name, version));
-                    continue;
-                }
+                foreach (string path in paths) {
+                    if (!File.Exists(path)) {
+                        continue;
+                    }
 
-                long size = new FileInfo(path).Length;
+                    found = true;
+                    string version = GetVersion(path);
 
-                if (binary.GetFileSize() != size) {
-                    // This file's size does not match the expected file size.
-                    incompatibleSize.Add(name);
-                    continue;
-                }
+                    if (!binary.GetVersion().Equals(version)) {
+                        // We've encountered an incompatible version.
+                        incompatibleVersion.Add(string.Format("{0} ({1})", name, version));
+                        continue;
+                    }
 
-                try {
-                    TakeOwnership(path);
-                } catch {
-                    // We failed to get ownership of the file...
-                    // No continue here, we still want to try to patch the file
-                    ownershipFailed.Add(name);
-                }
+                    long size = new FileInfo(path).Length;
 
-                try {
-                    using (FileStream fileStream = File.Open(path, FileMode.Open, FileAccess.Read)) {
-                        if (!binary.IsPatchable(fileStream)) {
-                            // This binary has already been patched.
-                            alreadyPatched.Add(name);
-                            continue;
+                    if (binary.GetFileSize() != size) {
+                        // This file's size does not match the expected file size.
+                        incompatibleSize.Add(name);
+                        continue;
+                    }
+
+                    try {
+                        TakeOwnership(path);
+                    } catch {
+                        // We failed to get ownership of the file...
+                        // No continue here, we still want to try to patch the file
+                        ownershipFailed.Add(name);
+                    }
+
+                    try {
+                        using (FileStream fileStream = File.Open(path, FileMode.Open, FileAccess.Read)) {
+                            if (!binary.IsPatchable(fileStream)) {
+                                // This binary has already been patched.
+                                alreadyPatched.Add(name);
+                                //continue;
+                            }
+                        }
+
+                        if (!madeBackupFolder && !Directory.Exists(backupFolder)) {
+                            Directory.CreateDirectory(backupFolder);
+                            madeBackupFolder = true;
+                        }
+
+                        // Back up the current plugin to our backup folder
+                        File.Copy(path, Path.Combine(backupFolder, binary.GetBackupFileName()), true);
+
+                        using (FileStream fileStream = File.Open(path, FileMode.Open, FileAccess.ReadWrite)) {
+                            // Apply all pending binary patches!
+                            binary.PatchFile(fileStream);
+                        }
+
+                        patched.Add(name);
+                    } catch (Exception e) {
+                        if (IsSharingViolation(e)) {
+                            // This is a sharing violation; i.e. the file is currently being used.
+                            locked.Add(name);
+                        } else {
+                            errors.Add(e.Message);
                         }
                     }
+                }
 
-                    if (!madeBackupFolder && !Directory.Exists(backupFolder)) {
-                        Directory.CreateDirectory(backupFolder);
-                        madeBackupFolder = true;
-                    }
-
-                    // Back up the current plugin to our backup folder
-                    File.Copy(path, Path.Combine(backupFolder, binary.GetBackupFileName()), true);
-
-                    using (FileStream fileStream = File.Open(path, FileMode.Open, FileAccess.ReadWrite)) {
-                        // Apply all pending binary patches!
-                        binary.PatchFile(fileStream);
-                    }
-
-                    patched.Add(name);
-                } catch (Exception e) {
-                    if (IsSharingViolation(e)) {
-                        // This is a sharing violation; i.e. the file is currently being used.
-                        locked.Add(name);
-                    } else {
-                        errors.Add(e.Message);
-                    }
+                if (!found) {
+                    notFound.Add(name);
                 }
             }
 

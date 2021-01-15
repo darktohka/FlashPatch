@@ -10,14 +10,21 @@ namespace FlashPatch {
         private bool x64;
         private long fileSize;
         private List<HexPatch> patches;
+        private List<string> alternatePaths;
 
-        public PatchableBinary(string name, string fileName, string version, bool x64, long fileSize, List<HexPatch> patches) {
+        public PatchableBinary(string name, string fileName, string version, bool x64, long fileSize, List<HexPatch> patches, List<string> alternatePaths) {
             this.name = name;
             this.fileName = fileName;
             this.version = version;
             this.x64 = x64;
             this.fileSize = fileSize;
             this.patches = patches;
+            this.alternatePaths = alternatePaths;
+        }
+
+        public PatchableBinary(string name, string fileName, string version, bool x64, long fileSize, List<HexPatch> patches) :
+            this(name, fileName, version, x64, fileSize, patches, new List<string>()) {
+            // Empty.
         }
 
         public string GetName() {
@@ -42,6 +49,10 @@ namespace FlashPatch {
 
         public List<HexPatch> GetPatches() {
             return patches;
+        }
+
+        public List<string> GetAlternatePaths() {
+            return alternatePaths;
         }
 
         public string GetBackupFileName() {
