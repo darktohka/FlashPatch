@@ -26,6 +26,10 @@ It bypasses the January 12st, 2021 killswitch that prevents you from playing any
 
 Adobe ships a current version of the Flash Player projector without the killswitch built-in [on their debug downloads page](https://adobe.com/support/flashplayer/debug_downloads.html).
 
+**I do not have Adobe Flash Player installed, where can I get it?**
+
+You can download Adobe Flash Player 32.0.0.465 from [this archived link](https://web.archive.org/web/20210112063313/http://fpdownload.adobe.com/get/flashplayer/pdc/32.0.0.465/install_flash_player.exe).
+
 ## Usage
 
 - Extract `FlashPatch.exe` into a new folder.
