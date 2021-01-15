@@ -4,6 +4,8 @@
 
 ![Image of FlashPatch](https://i.imgur.com/0Sijhao.png)
 
+[Download latest version](https://github.com/darktohka/FlashPatch/releases/latest)
+
 ## What's this?
 
 FlashPatch! is a tool that modifies the Flash Player installation on your computer, making it possible to play games in the browser again.
