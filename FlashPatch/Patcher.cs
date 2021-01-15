@@ -330,7 +330,7 @@ namespace FlashPatch {
             AppendItems(report, "These plugins could not be patched because their respective browser is currently open:", locked);
             AppendItems(report, "Caught exceptions:", errors);
 
-            if (notFound.Count > 0 || incompatibleVersion.Count > 0 || incompatibleSize.Count > 0 || locked.Count > 0 || errors.Count > 0) {
+            if (incompatibleVersion.Count > 0 || incompatibleSize.Count > 0 || locked.Count > 0 || errors.Count > 0) {
                 icon = MessageBoxIcon.Warning;
                 report.AppendLine("Errors have been encountered during the patching process. Please try again after reading the message above carefully.");
             } else if (patched.Count > 0) {
