@@ -12,11 +12,11 @@ It bypasses the January 12nd, 2021 killswitch that prevents you from playing any
 
 ## Compatibility
 
-| Browser           | Plugin API       | 64-bit supported?  | 32-bit supported?  | 64-bit tested?     | 32-bit tested?           |
-|-------------------|------------------|--------------------|--------------------|--------------------|--------------------------|
-| Google Chrome     | PPAPI (Pepper)   | :heavy_check_mark: | :x:                | :heavy_check_mark: | :heavy_multiplication_x: |
-| Mozilla Firefox   | NPAPI (Netscape) | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:       |
-| Internet Explorer | ActiveX (OCX)    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :x:                      |
+| Browser           | Plugin API       | Version    | 64-bit supported?  | 32-bit supported?  | 64-bit tested?     | 32-bit tested?           |
+|-------------------|------------------|------------|--------------------|--------------------|--------------------|--------------------------|
+| Google Chrome     | PPAPI (Pepper)   | 32.0.0.465 | :heavy_check_mark: | :x:                | :heavy_check_mark: | :heavy_multiplication_x: |
+| Mozilla Firefox   | NPAPI (Netscape) | 32.0.0.465 | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:       |
+| Internet Explorer | ActiveX (OCX)    | 32.0.0.445 | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:       |
 
 ## Flash Player
 
