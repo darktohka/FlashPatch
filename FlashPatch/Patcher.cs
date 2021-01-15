@@ -192,6 +192,10 @@ namespace FlashPatch {
                 return;
             }
 
+
+            WinAPI.ModifyPrivilege(PrivilegeName.SeRestorePrivilege, true);
+            WinAPI.ModifyPrivilege(PrivilegeName.SeTakeOwnershipPrivilege, true);
+
             IntPtr wow64Value = IntPtr.Zero;
 
             // Disable file system indirection (otherwise we can't read System32)
@@ -352,6 +356,9 @@ namespace FlashPatch {
                 ShowError("No backups are currently available.");
                 return;
             }
+
+            WinAPI.ModifyPrivilege(PrivilegeName.SeRestorePrivilege, true);
+            WinAPI.ModifyPrivilege(PrivilegeName.SeTakeOwnershipPrivilege, true);
 
             IntPtr wow64Value = IntPtr.Zero;
 
