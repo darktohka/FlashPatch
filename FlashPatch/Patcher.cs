@@ -170,7 +170,7 @@ namespace FlashPatch {
         }
 
         private static void TakeOwnership(string filename) {
-            FileSecurity security = File.GetAccessControl(filename);
+            FileSecurity security = new FileSecurity();
 
             SecurityIdentifier sid = WindowsIdentity.GetCurrent().User;
             security.SetOwner(sid);
@@ -181,6 +181,10 @@ namespace FlashPatch {
 
         public static void PatchAll() {
             if (MessageBox.Show("Are you sure you want to patch your system-wide Flash plugins to remove the January 12nd, 2021 killswitch and allow Flash games to be played in your browser?", "FlashPatch!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) {
+                return;
+            }
+
+            if (MessageBox.Show("Have you closed ALL your browser windows yet?\n\nIf not, please close them right now!", "FlashPatch!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) {
                 return;
             }
 
@@ -275,7 +279,7 @@ namespace FlashPatch {
                             if (!binary.IsPatchable(fileStream)) {
                                 // This binary has already been patched.
                                 alreadyPatched.Add(name);
-                                //continue;
+                                continue;
                             }
                         }
 
