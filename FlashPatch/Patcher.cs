@@ -332,7 +332,7 @@ namespace FlashPatch {
 
             if (incompatibleVersion.Count > 0 || incompatibleSize.Count > 0 || locked.Count > 0 || errors.Count > 0) {
                 icon = MessageBoxIcon.Warning;
-                report.AppendLine("Errors have been encountered during the patching process. Please try again after reading the message above carefully.");
+                report.AppendLine("Errors have been encountered during the patching process.\nPlease try again after reading the message above carefully.\nIf the browser you're using has been patched successfully, then no more action is required.");
             } else if (patched.Count > 0) {
                 report.AppendLine("CONGRATULATIONS! The patching process has completed as expected. Enjoy your Flash games!");
             } else if (alreadyPatched.Count > 0) {
