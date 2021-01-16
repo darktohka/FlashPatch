@@ -32,6 +32,7 @@ namespace FlashPatch {
             this.versionLabel = new System.Windows.Forms.Label();
             this.descriptionLabel = new System.Windows.Forms.Label();
             this.githubLabel = new System.Windows.Forms.Label();
+            this.patchFileLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // patchButton
@@ -82,7 +83,7 @@ namespace FlashPatch {
             this.versionLabel.Name = "versionLabel";
             this.versionLabel.Size = new System.Drawing.Size(49, 25);
             this.versionLabel.TabIndex = 3;
-            this.versionLabel.Text = "v1.1";
+            this.versionLabel.Text = "v1.2";
             // 
             // descriptionLabel
             // 
@@ -112,12 +113,27 @@ namespace FlashPatch {
             this.githubLabel.MouseEnter += new System.EventHandler(this.githubLabel_MouseEnter);
             this.githubLabel.MouseLeave += new System.EventHandler(this.githubLabel_MouseLeave);
             // 
+            // patchFileLabel
+            // 
+            this.patchFileLabel.AutoSize = true;
+            this.patchFileLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.patchFileLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.patchFileLabel.ForeColor = System.Drawing.Color.White;
+            this.patchFileLabel.Location = new System.Drawing.Point(239, 171);
+            this.patchFileLabel.Name = "patchFileLabel";
+            this.patchFileLabel.Size = new System.Drawing.Size(65, 13);
+            this.patchFileLabel.TabIndex = 6;
+            this.patchFileLabel.Text = "Patch File...";
+            this.patchFileLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.patchFileLabel.Click += new System.EventHandler(this.patchFileLabel_Click);
+            // 
             // PatchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(316, 197);
+            this.Controls.Add(this.patchFileLabel);
             this.Controls.Add(this.githubLabel);
             this.Controls.Add(this.descriptionLabel);
             this.Controls.Add(this.versionLabel);
@@ -142,5 +158,6 @@ namespace FlashPatch {
         private System.Windows.Forms.Label versionLabel;
         private System.Windows.Forms.Label descriptionLabel;
         private System.Windows.Forms.Label githubLabel;
+        private System.Windows.Forms.Label patchFileLabel;
     }
 }

@@ -35,6 +35,10 @@ namespace FlashPatch {
             return fileName;
         }
 
+        public bool HasFileName() {
+            return !string.IsNullOrWhiteSpace(fileName);
+        }
+
         public string GetVersion() {
             return version;
         }
@@ -62,6 +66,16 @@ namespace FlashPatch {
         public bool IsPatchable(FileStream file) {
             foreach (HexPatch patch in patches) {
                 if (patch.IsPatchable(file)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool IsPatched(FileStream file) {
+            foreach (HexPatch patch in patches) {
+                if (patch.IsPatched(file)) {
                     return true;
                 }
             }

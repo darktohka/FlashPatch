@@ -110,6 +110,56 @@ namespace FlashPatch {
                     new byte[] { 0x84, 0xC0, 0x74 },
                     new byte[] { 0x90, 0x90, 0xEB }
                 )
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: NPSWF32_32_0_0_465.dll
+                "Firefox 32-bit Debug Plugin (NPAPI)", null, "32,0,0,465", false, 21235768, new List<HexPatch>() {
+                new HexPatch(
+                    0x2E44E5,
+                    new byte[] { 0x84, 0xC0, 0x74 },
+                    new byte[] { 0x90, 0x90, 0xEB }
+                ),
+                new HexPatch(
+                    0x2FBAEA,
+                    new byte[] { 0x84, 0xC0, 0x74 },
+                    new byte[] { 0x90, 0x90, 0xEB }
+                ),
+                new HexPatch(
+                    0x305E98,
+                    new byte[] { 0x84, 0xC0, 0x74 },
+                    new byte[] { 0x90, 0x90, 0xEB }
+                ),
+                new HexPatch(
+                    0x40E363,
+                    new byte[] { 0x84, 0xC0, 0x74 },
+                    new byte[] { 0x90, 0x90, 0xEB }
+                )
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: libflashplayer.so
+                "Linux 64-bit Flash Player", null, "32,0,0,465", false, 21235768, new List<HexPatch>() {
+                new HexPatch(
+                    0x2E44E5,
+                    new byte[] { 0x84, 0xC0, 0x74 },
+                    new byte[] { 0x90, 0x90, 0xEB }
+                ),
+                new HexPatch(
+                    0x2FBAEA,
+                    new byte[] { 0x84, 0xC0, 0x74 },
+                    new byte[] { 0x90, 0x90, 0xEB }
+                ),
+                new HexPatch(
+                    0x305E98,
+                    new byte[] { 0x84, 0xC0, 0x74 },
+                    new byte[] { 0x90, 0x90, 0xEB }
+                ),
+                new HexPatch(
+                    0x40E363,
+                    new byte[] { 0x84, 0xC0, 0x74 },
+                    new byte[] { 0x90, 0x90, 0xEB }
+                )
             })
         };
 
@@ -118,6 +168,11 @@ namespace FlashPatch {
 
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern bool Wow64RevertWow64FsRedirection(IntPtr ptr);
+
+        static Patcher() {
+            WinAPI.ModifyPrivilege(PrivilegeName.SeRestorePrivilege, true);
+            WinAPI.ModifyPrivilege(PrivilegeName.SeTakeOwnershipPrivilege, true);
+        }
 
         private static string GetWindowsDir() {
             return Environment.GetFolderPath(Environment.SpecialFolder.Windows);
@@ -192,10 +247,6 @@ namespace FlashPatch {
                 return;
             }
 
-
-            WinAPI.ModifyPrivilege(PrivilegeName.SeRestorePrivilege, true);
-            WinAPI.ModifyPrivilege(PrivilegeName.SeTakeOwnershipPrivilege, true);
-
             IntPtr wow64Value = IntPtr.Zero;
 
             // Disable file system indirection (otherwise we can't read System32)
@@ -233,6 +284,12 @@ namespace FlashPatch {
             bool madeBackupFolder = false;
 
             foreach (PatchableBinary binary in binaries) {
+                if (!binary.HasFileName()) {
+                    // This is a special binary, as we do not specifically look for it.
+                    // This binary can only be patched using the "Patch File..." option
+                    continue;
+                }
+
                 bool binaryX64 = binary.IsX64();
 
                 if (binaryX64 && !x64) {
@@ -344,6 +401,101 @@ namespace FlashPatch {
             MessageBox.Show(report.ToString(), "FlashPatch!", MessageBoxButtons.OK, icon);
         }
 
+        public static void PatchFiles(string[] paths) {
+            List<string> patched = new List<string>();
+            List<string> alreadyPatched = new List<string>();
+            List<string> notPatched = new List<string>();
+            List<string> ownershipFailed = new List<string>();
+            List<string> locked = new List<string>();
+            List<string> errors = new List<string>();
+
+            foreach (string path in paths) {
+                string filename = Path.GetFileName(path);
+                long size = new FileInfo(path).Length;
+
+                try {
+                    TakeOwnership(path);
+                } catch {
+                    // We failed to get ownership of the file...
+                    // No continue here, we still want to try to patch the file
+                    ownershipFailed.Add(filename);
+                }
+
+                bool complete = false;
+
+                foreach (PatchableBinary binary in binaries) {
+                    if (binary.GetFileSize() != size) {
+                        continue;
+                    }
+
+                    try {
+                        using (FileStream fileStream = File.Open(path, FileMode.Open, FileAccess.Read)) {
+                            if (!binary.IsPatchable(fileStream)) {
+                                if (binary.IsPatched(fileStream)) {
+                                    // This binary has already been patched.
+                                    alreadyPatched.Add(filename);
+                                    complete = true;
+                                    break;
+                                }
+
+                                // This binary hasn't been patched, but it's not patchable either.
+                                // This means that the current patch does not match this file.
+                                continue;
+                            }
+                        }
+
+                        // Back up the plugin to the same folder with a ".bak" extension
+                        File.Copy(path, Path.Combine(Path.GetDirectoryName(path), filename + ".bak"), true);
+
+                        using (FileStream fileStream = File.Open(path, FileMode.Open, FileAccess.ReadWrite)) {
+                            // Apply all pending binary patches!
+                            binary.PatchFile(fileStream);
+                        }
+
+                        patched.Add(string.Format("{0} (patch used: {1})", filename, binary.GetName()));
+                        complete = true;
+                        break;
+                    } catch (Exception e) {
+                        if (IsSharingViolation(e)) {
+                            // This is a sharing violation; i.e. the file is currently being used.
+                            locked.Add(filename);
+                        } else {
+                            errors.Add(e.Message);
+                        }
+                    }
+                }
+
+                if (!complete) {
+                    notPatched.Add(filename);
+                }
+            }
+
+            StringBuilder report = new StringBuilder();
+            MessageBoxIcon icon = MessageBoxIcon.Information;
+
+            AppendItems(report, "Successfully patched these binaries:", patched);
+            AppendItems(report, "These binaries have already been patched:", alreadyPatched);
+            AppendItems(report, "These binaries have not been patched, as compatible patches do not exist:", notPatched);
+            AppendItems(report, "These binaries could not be patched because their respective browser is currently open:", locked);
+            AppendItems(report, "Failed to take ownership of the following binaries:", ownershipFailed);
+            AppendItems(report, "Caught exceptions:", errors);
+
+            if (locked.Count > 0 || errors.Count > 0) {
+                icon = MessageBoxIcon.Warning;
+                report.AppendLine("Errors have been encountered during the patching process.\nPlease try again after reading the message above carefully.");
+            } else if (notPatched.Count > 0) {
+                icon = MessageBoxIcon.Warning;
+                report.AppendLine("Sorry, but we couldn't patch some of your binaries.");
+            } else if (patched.Count > 0) {
+                report.AppendLine("Great work! All binaries have been successfully patched.");
+            } else if (alreadyPatched.Count > 0) {
+                report.AppendLine("Looks like all of your binaries have already been patched!");
+            } else {
+                report.AppendLine("No action has been taken.");
+            }
+
+            MessageBox.Show(report.ToString(), "FlashPatch!", MessageBoxButtons.OK, icon);
+        }
 
         public static void RestoreAll() {
             if (MessageBox.Show("Are you sure you want to restore your Flash Plugin backups?", "FlashPatch!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) {
@@ -356,9 +508,6 @@ namespace FlashPatch {
                 ShowError("No backups are currently available.");
                 return;
             }
-
-            WinAPI.ModifyPrivilege(PrivilegeName.SeRestorePrivilege, true);
-            WinAPI.ModifyPrivilege(PrivilegeName.SeTakeOwnershipPrivilege, true);
 
             IntPtr wow64Value = IntPtr.Zero;
 

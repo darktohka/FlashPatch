@@ -30,18 +30,30 @@ namespace FlashPatch {
             return originalBytes.Length;
         }
 
-        public bool IsPatchable(byte[] readBytes) {
-            return Enumerable.SequenceEqual(readBytes, originalBytes);
-        }
-
-        public bool IsPatchable(FileStream fileStream) {
+        private byte[] ReadBytes(FileStream fileStream) {
             fileStream.Position = offset;
 
             int length = GetLength();
             byte[] readBytes = new byte[length];
 
             fileStream.Read(readBytes, 0, length);
-            return IsPatchable(readBytes);
+            return readBytes;
+        }
+
+        public bool IsPatchable(byte[] readBytes) {
+            return Enumerable.SequenceEqual(readBytes, originalBytes);
+        }
+
+        public bool IsPatched(byte[] readBytes) {
+            return Enumerable.SequenceEqual(readBytes, patchedBytes);
+        }
+
+        public bool IsPatchable(FileStream fileStream) {
+            return IsPatchable(ReadBytes(fileStream));
+        }
+
+        public bool IsPatched(FileStream fileStream) {
+            return IsPatched(ReadBytes(fileStream));
         }
 
         public void PatchFile(FileStream fileStream) {
