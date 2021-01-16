@@ -10,7 +10,7 @@
 
 FlashPatch! is a tool that modifies the Flash Player installation on your computer, making it possible to play games in the browser again.
 
-It bypasses the January 12st, 2021 killswitch that prevents you from playing any Flash Player game or animation after January 12st.
+It bypasses the January 12th, 2021 killswitch that prevents you from playing any Flash Player game or animation after January 12th.
 
 ## Compatibility
 
