@@ -14,11 +14,11 @@ It bypasses the January 12st, 2021 killswitch that prevents you from playing any
 
 ## Compatibility
 
-| Browser           | Plugin API       | Version    | 64-bit supported?  | 32-bit supported?  | 64-bit tested?     | 32-bit tested?           |
-| ----------------- | ---------------- | ---------- | ------------------ | ------------------ | ------------------ | ------------------------ |
-| Google Chrome     | PPAPI (Pepper)   | 32.0.0.465 | :heavy_check_mark: | :x:                | :heavy_check_mark: | :heavy_multiplication_x: |
-| Mozilla Firefox   | NPAPI (Netscape) | 32.0.0.465 | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:       |
-| Internet Explorer | ActiveX (OCX)    | 32.0.0.445 | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:       |
+| Browser           | Plugin API       | Version    | Windows            | Linux                    | Mac                      | 64-bit             | 32-bit             |
+| ----------------- | ---------------- | ---------- | ------------------ | ------------------------ | ------------------------ | ------------------ | ------------------ |
+| Google Chrome     | PPAPI (Pepper)   | 32.0.0.465 | :heavy_check_mark: | :heavy_check_mark:       | :x:                      | :heavy_check_mark: | :x:                |
+| Mozilla Firefox   | NPAPI (Netscape) | 32.0.0.465 | :heavy_check_mark: | :heavy_check_mark:       | :x:                      | :heavy_check_mark: | :heavy_check_mark: |
+| Internet Explorer | ActiveX (OCX)    | 32.0.0.445 | :heavy_check_mark: | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark: | :heavy_check_mark: |
 
 ## Flash Player
 
@@ -29,6 +29,12 @@ Adobe ships a current version of the Flash Player projector without the killswit
 **I do not have Adobe Flash Player installed, where can I get it?**
 
 You can download Adobe Flash Player 32.0.0.465 from [this archived link](https://web.archive.org/web/20210112063313/http://fpdownload.adobe.com/get/flashplayer/pdc/32.0.0.465/install_flash_player.exe). You might need to turn back your system clock to January 11th, 2021 or earlier to install it.
+
+## Linux
+
+**I would like to use Flash Player on Linux!**
+
+Unfortunately, the tool only works on Windows right now, but if you have a Windows machine, feel free to manually patch version 32.0.0.465 of `libpepflashplayer.so` or `libflashplayer.so`. You can then use these binaries on your Linux machine.
 
 ## Usage
 
