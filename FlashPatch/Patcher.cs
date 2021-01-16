@@ -139,7 +139,7 @@ namespace FlashPatch {
             new PatchableBinary(
                 // WARNING: This binary can only be applied using the "Patch File..." option
                 // Filename: libflashplayer.so
-                "Linux 64-bit Firefox Plugin (NPAPI)", null, "32,0,0,465", false, 16653576, new List<HexPatch>() {
+                "Linux 64-bit Firefox Plugin (NPAPI)", null, "32,0,0,465", true, 16653576, new List<HexPatch>() {
                 new HexPatch(
                     0x591EB5,
                     new byte[] { 0x84, 0xC0, 0x0F, 0x84, 0x9B, 0x01 },
@@ -164,7 +164,7 @@ namespace FlashPatch {
             new PatchableBinary(
                 // WARNING: This binary can only be applied using the "Patch File..." option
                 // Filename: libpepflashplayer.so
-                "Linux 64-bit Chrome Plugin (PPAPI)", null, "32,0,0,465", false, 19509216, new List<HexPatch>() {
+                "Linux 64-bit Chrome Plugin (PPAPI)", null, "32,0,0,465", true, 19509216, new List<HexPatch>() {
                 new HexPatch(
                     0x24B62A,
                     new byte[] { 0x84, 0xC0, 0x0F, 0x85, 0x2E, 0x02, 0x00, 0x00 },
@@ -244,6 +244,56 @@ namespace FlashPatch {
                     0x568EEC,
                     new byte[] { 0x0F, 0x85, 0x9A, 0x01, 0x00, 0x00 },
                     new byte[] { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 }
+                )
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: PepperFlashPlayer
+                "Mac 64-bit Chrome Plugin (PPAPI)", null, "32,0,0,465", true, 27794224, new List<HexPatch>() {
+                new HexPatch(
+                    0x4FF9C,
+                    new byte[] { 0x84, 0xC0, 0x74 },
+                    new byte[] { 0x90, 0x90, 0xEB }
+                ),
+                new HexPatch(
+                    0x5A6AF2,
+                    new byte[] { 0x84, 0xC0, 0x74 },
+                    new byte[] { 0x90, 0x90, 0xEB }
+                ),
+                new HexPatch(
+                    0x5A750A,
+                    new byte[] { 0x84, 0xC0, 0x0F, 0x85, 0xC6, 0x02, 0x00, 0x00 },
+                    new byte[] { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x5B9F93,
+                    new byte[] { 0x84, 0xC0, 0x74 },
+                    new byte[] { 0x90, 0x90, 0xEB }
+                )
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: FlashPlayer-10.6
+                "Mac 64-bit Firefox Plugin (NPAPI)", null, "32,0,0,465", true, 29359280, new List<HexPatch>() {
+                new HexPatch(
+                    0x3E573B,
+                    new byte[] { 0x84, 0xC0, 0x74 },
+                    new byte[] { 0x90, 0x90, 0xEB }
+                ),
+                new HexPatch(
+                    0x3E62CD,
+                    new byte[] { 0x84, 0xC0, 0x0F, 0x85, 0x2D, 0x03, 0x00, 0x00 },
+                    new byte[] { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x3FA867,
+                    new byte[] { 0x84, 0xC0, 0x74 },
+                    new byte[] { 0x90, 0x90, 0xEB }
+                ),
+                new HexPatch(
+                    0x47FA13,
+                    new byte[] { 0x84, 0xC0, 0x74 },
+                    new byte[] { 0x90, 0x90, 0xEB }
                 )
             })
         };
