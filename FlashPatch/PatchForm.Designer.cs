@@ -34,9 +34,9 @@ namespace FlashPatch {
             this.githubLabel = new System.Windows.Forms.Label();
             this.patchFileLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            //
+            // 
             // patchButton
-            //
+            // 
             this.patchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.patchButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.patchButton.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -48,9 +48,9 @@ namespace FlashPatch {
             this.patchButton.Text = "Patch";
             this.patchButton.UseVisualStyleBackColor = true;
             this.patchButton.Click += new System.EventHandler(this.patchButton_Click);
-            //
+            // 
             // restoreButton
-            //
+            // 
             this.restoreButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.restoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.restoreButton.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold);
@@ -62,9 +62,9 @@ namespace FlashPatch {
             this.restoreButton.Text = "Restore";
             this.restoreButton.UseVisualStyleBackColor = true;
             this.restoreButton.Click += new System.EventHandler(this.restoreButton_Click);
-            //
+            // 
             // logoLabel
-            //
+            // 
             this.logoLabel.AutoSize = true;
             this.logoLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoLabel.ForeColor = System.Drawing.Color.White;
@@ -73,9 +73,9 @@ namespace FlashPatch {
             this.logoLabel.Size = new System.Drawing.Size(197, 47);
             this.logoLabel.TabIndex = 2;
             this.logoLabel.Text = "FlashPatch!";
-            //
+            // 
             // versionLabel
-            //
+            // 
             this.versionLabel.AutoSize = true;
             this.versionLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.versionLabel.ForeColor = System.Drawing.Color.White;
@@ -83,22 +83,22 @@ namespace FlashPatch {
             this.versionLabel.Name = "versionLabel";
             this.versionLabel.Size = new System.Drawing.Size(49, 25);
             this.versionLabel.TabIndex = 3;
-            this.versionLabel.Text = "v1.3";
-            //
+            this.versionLabel.Text = "v1.4";
+            // 
             // descriptionLabel
-            //
+            // 
             this.descriptionLabel.AutoSize = true;
             this.descriptionLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.descriptionLabel.ForeColor = System.Drawing.Color.White;
             this.descriptionLabel.Location = new System.Drawing.Point(28, 62);
             this.descriptionLabel.Name = "descriptionLabel";
-            this.descriptionLabel.Size = new System.Drawing.Size(248, 40);
+            this.descriptionLabel.Size = new System.Drawing.Size(250, 40);
             this.descriptionLabel.TabIndex = 4;
             this.descriptionLabel.Text = "Play Adobe Flash Player games in\r\nthe browser after January 12th, 2021.";
             this.descriptionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //
+            // 
             // githubLabel
-            //
+            // 
             this.githubLabel.AutoSize = true;
             this.githubLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.githubLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -112,9 +112,9 @@ namespace FlashPatch {
             this.githubLabel.Click += new System.EventHandler(this.githubLabel_Click);
             this.githubLabel.MouseEnter += new System.EventHandler(this.githubLabel_MouseEnter);
             this.githubLabel.MouseLeave += new System.EventHandler(this.githubLabel_MouseLeave);
-            //
+            // 
             // patchFileLabel
-            //
+            // 
             this.patchFileLabel.AutoSize = true;
             this.patchFileLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.patchFileLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -126,9 +126,9 @@ namespace FlashPatch {
             this.patchFileLabel.Text = "Patch File...";
             this.patchFileLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.patchFileLabel.Click += new System.EventHandler(this.patchFileLabel_Click);
-            //
+            // 
             // PatchForm
-            //
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));

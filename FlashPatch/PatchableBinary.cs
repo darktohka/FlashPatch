@@ -43,12 +43,20 @@ namespace FlashPatch {
             return version;
         }
 
+        public bool HasVersion() {
+            return !string.IsNullOrWhiteSpace(version);
+        }
+
         public bool IsX64() {
             return x64;
         }
 
         public long GetFileSize() {
             return fileSize;
+        }
+
+        public bool HasFileSize() {
+            return fileSize >= 0;
         }
 
         public List<HexPatch> GetPatches() {

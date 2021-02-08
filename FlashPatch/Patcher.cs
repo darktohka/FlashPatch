@@ -295,6 +295,14 @@ namespace FlashPatch {
                     new byte[] { 0x84, 0xC0, 0x74 },
                     new byte[] { 0x90, 0x90, 0xEB }
                 )
+            }),
+            new PatchableBinary(
+                "Generic Flash Player Binary", null, null, false, -1, new List<HexPatch>() {
+                new HexPatch(
+                    -1,
+                    new byte[] { 0x00, 0x00, 0x40, 0x46, 0x3E, 0x6F, 0x77, 0x42 },
+                    new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x7F }
+                )
             })
         };
 
@@ -559,7 +567,7 @@ namespace FlashPatch {
                 bool complete = false;
 
                 foreach (PatchableBinary binary in binaries) {
-                    if (binary.GetFileSize() != size) {
+                    if (binary.HasFileSize() && binary.GetFileSize() != size) {
                         continue;
                     }
 
@@ -673,6 +681,10 @@ namespace FlashPatch {
             List<string> errors = new List<string>();
 
             foreach (PatchableBinary binary in binaries) {
+                if (!binary.HasFileName()) {
+                    continue;
+                }
+
                 bool binaryX64 = binary.IsX64();
 
                 if (binaryX64 && !x64) {
