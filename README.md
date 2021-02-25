@@ -45,6 +45,12 @@ You can download Adobe Flash Player 32.0.0.465 from [this archived link](https:/
 
 Unfortunately, the tool only works on Windows right now, but if you have a Windows machine, feel free to manually patch version 32.0.0.465 of `libpepflashplayer.so` or `libflashplayer.so`. You can then use these binaries on your Linux machine.
 
+## Windows XP
+
+**I need to use Flash Player on Windows XP!**
+
+FlashPatch is not compatible with Windows XP. FlashPatch relies on .NET Framework 4.5, but the last supported version of .NET Framework on Windows XP is [4.0.3](https://docs.microsoft.com/en-us/dotnet/framework/install/on-windows-xp#net-framework-403). Regardless, there is a way to keep using Flash on Windows XP. [Please check out the following instructions on GitHub.](https://github.com/darktohka/FlashPatch/issues/7#issuecomment-785096536)
+
 ## Usage
 
 - Extract `FlashPatch.exe` into a new folder.
