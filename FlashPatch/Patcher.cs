@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 using System.Management;
+using System.ServiceProcess;
 
 namespace FlashPatch {
     public class Patcher {
@@ -398,7 +399,8 @@ namespace FlashPatch {
         };
 
         private static string executionOptionsPath = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\";
-        private static List<string> telemetryApps = new List<string>() { "FlashCenterService.exe" };
+        private static List<string> telemetryApps = new List<string>() { "FlashCenterService.exe", "FlashHelperService.exe" };
+        private static List<string> telemetryServices = new List<string>() { "FlashCenterService", "Flash Helper Service" };
 
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern bool Wow64DisableWow64FsRedirection(ref IntPtr ptr);
@@ -459,6 +461,12 @@ namespace FlashPatch {
             }
 
             builder.AppendLine();
+        }
+
+        private static void StopService(string serviceName) {
+            ServiceController service = new ServiceController(serviceName);
+            
+            service.Stop();
         }
 
         private static void ChangeServiceStartMode(string serviceName, string startMode) {
@@ -527,10 +535,18 @@ namespace FlashPatch {
                 }
             }
 
-            try {
-                ChangeServiceStartMode("FlashCenterService", "Disabled");
-            } catch (Exception e) {
-                // It's fine if this doesn't work
+            foreach (string service in telemetryServices) {
+                try {
+                    ChangeServiceStartMode(service, "Disabled");
+                } catch (Exception e) {
+                    // It's fine if this doesn't work
+                }
+
+                try {
+                    StopService(service);
+                } catch (Exception e) {
+                    // It's fine if this doesn't work
+                }
             }
 
             try {
@@ -774,18 +790,21 @@ namespace FlashPatch {
                 return;
             }
 
-            try {
-                ChangeServiceStartMode("FlashCenterService", "Automatic");
-            } catch (Exception e) {
-                // It's fine if this doesn't work
+            foreach (string service in telemetryServices) {
+                try {
+                    ChangeServiceStartMode(service, "Automatic");
+                } catch (Exception e) {
+                    // It's fine if this doesn't work
+                }
             }
 
-            try {
-                foreach (string telemetryApp in telemetryApps) {
+            foreach (string telemetryApp in telemetryApps) {
+                try {
                     RestoreExecution(telemetryApp);
+                } catch (Exception e) {
+                    // It's fine if this doesn't work.
+                    // This means that the redirection has been removed.
                 }
-            } catch (Exception e) {
-                ShowError(string.Format("Could not re-enable Flash Player telemetry! Are you running this application as administrator?\n\n{0}", e.Message));
             }
 
             string backupFolder = Path.Combine(Environment.CurrentDirectory, "Backup");
