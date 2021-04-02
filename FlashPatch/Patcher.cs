@@ -7,6 +7,7 @@ using System.Security.Principal;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using Microsoft.Win32;
 
 namespace FlashPatch {
     public class Patcher {
@@ -395,6 +396,9 @@ namespace FlashPatch {
             })
         };
 
+        private static string executionOptionsPath = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\";
+        private static List<string> telemetryApps = new List<string>() { "FlashCenterService.exe" };
+
         [DllImport("kernel32.dll", SetLastError = true)]
         static extern bool Wow64DisableWow64FsRedirection(ref IntPtr ptr);
 
@@ -456,6 +460,22 @@ namespace FlashPatch {
             builder.AppendLine();
         }
 
+        private static void ChangeServiceStartMode(string serviceName, string startMode) {
+            using (ManagementObject obj = new ManagementObject(string.Format("Win32_Service.Name=\"{0}\"", serviceName))) {
+                obj.InvokeMethod("ChangeStartMode", new object[] { startMode });
+            }
+        }
+
+        private static void PreventExecution(string filename) {
+            RegistryKey key = Registry.LocalMachine.CreateSubKey(executionOptionsPath + filename);
+
+            key.SetValue("Debugger", Guid.NewGuid().ToString() + ".exe");
+        }
+
+        private static void RestoreExecution(string filename) {
+            Registry.LocalMachine.DeleteSubKeyTree(executionOptionsPath + filename);
+        }
+
         private static void TakeOwnership(string filename) {
             // Remove read-only attribute
             File.SetAttributes(filename, File.GetAttributes(filename) & ~FileAttributes.ReadOnly);
@@ -470,7 +490,7 @@ namespace FlashPatch {
         }
 
         public static void PatchAll() {
-            if (MessageBox.Show("Are you sure you want to patch your system-wide Flash plugins to remove the January 12th, 2021 killswitch and allow Flash games to be played in your browser?", "FlashPatch!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) {
+            if (MessageBox.Show("Are you sure you want to patch your system-wide Flash plugins to allow Flash games to be played in your browser?", "FlashPatch!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) {
                 return;
             }
 
@@ -504,6 +524,20 @@ namespace FlashPatch {
                     ShowError(string.Format("Could not find 64-bit Flash directory!\n\n{0} does not exist.", flashDir64));
                     return;
                 }
+            }
+
+            try {
+                ChangeServiceStartMode("FlashCenterService", "Disabled");
+            } catch (Exception e) {
+                // It's fine if this doesn't work
+            }
+
+            try {
+                foreach (string telemetryApp in telemetryApps) {
+                    PreventExecution(telemetryApp);
+                }
+            } catch (Exception e) {
+                ShowError(string.Format("Could not disable Flash Player telemetry! Are you running this application as administrator?\n\n{0}", e.Message));
             }
 
             List<string> patched = new List<string>();
@@ -737,6 +771,20 @@ namespace FlashPatch {
         public static void RestoreAll() {
             if (MessageBox.Show("Are you sure you want to restore your Flash Plugin backups?", "FlashPatch!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) {
                 return;
+            }
+
+            try {
+                ChangeServiceStartMode("FlashCenterService", "Automatic");
+            } catch (Exception e) {
+                // It's fine if this doesn't work
+            }
+
+            try {
+                foreach (string telemetryApp in telemetryApps) {
+                    RestoreExecution(telemetryApp);
+                }
+            } catch (Exception e) {
+                ShowError(string.Format("Could not re-enable Flash Player telemetry! Are you running this application as administrator?\n\n{0}", e.Message));
             }
 
             string backupFolder = Path.Combine(Environment.CurrentDirectory, "Backup");

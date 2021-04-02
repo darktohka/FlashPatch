@@ -41,7 +41,7 @@ namespace FlashPatch {
             this.patchButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.patchButton.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patchButton.ForeColor = System.Drawing.Color.White;
-            this.patchButton.Location = new System.Drawing.Point(54, 116);
+            this.patchButton.Location = new System.Drawing.Point(54, 134);
             this.patchButton.Name = "patchButton";
             this.patchButton.Size = new System.Drawing.Size(95, 45);
             this.patchButton.TabIndex = 0;
@@ -55,7 +55,7 @@ namespace FlashPatch {
             this.restoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.restoreButton.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold);
             this.restoreButton.ForeColor = System.Drawing.Color.White;
-            this.restoreButton.Location = new System.Drawing.Point(159, 116);
+            this.restoreButton.Location = new System.Drawing.Point(159, 134);
             this.restoreButton.Name = "restoreButton";
             this.restoreButton.Size = new System.Drawing.Size(95, 45);
             this.restoreButton.TabIndex = 1;
@@ -83,7 +83,7 @@ namespace FlashPatch {
             this.versionLabel.Name = "versionLabel";
             this.versionLabel.Size = new System.Drawing.Size(49, 25);
             this.versionLabel.TabIndex = 3;
-            this.versionLabel.Text = "v1.4";
+            this.versionLabel.Text = "v1.5";
             // 
             // descriptionLabel
             // 
@@ -92,9 +92,10 @@ namespace FlashPatch {
             this.descriptionLabel.ForeColor = System.Drawing.Color.White;
             this.descriptionLabel.Location = new System.Drawing.Point(28, 62);
             this.descriptionLabel.Name = "descriptionLabel";
-            this.descriptionLabel.Size = new System.Drawing.Size(250, 40);
+            this.descriptionLabel.Size = new System.Drawing.Size(250, 60);
             this.descriptionLabel.TabIndex = 4;
-            this.descriptionLabel.Text = "Play Adobe Flash Player games in\r\nthe browser after January 12th, 2021.";
+            this.descriptionLabel.Text = "Play Adobe Flash Player games in\r\nthe browser after January 12th, 2021.\r\nNow supp" +
+    "orts Chinese Flash!";
             this.descriptionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // githubLabel
@@ -103,7 +104,7 @@ namespace FlashPatch {
             this.githubLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.githubLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.githubLabel.ForeColor = System.Drawing.Color.White;
-            this.githubLabel.Location = new System.Drawing.Point(12, 171);
+            this.githubLabel.Location = new System.Drawing.Point(12, 189);
             this.githubLabel.Name = "githubLabel";
             this.githubLabel.Size = new System.Drawing.Size(122, 13);
             this.githubLabel.TabIndex = 5;
@@ -119,7 +120,7 @@ namespace FlashPatch {
             this.patchFileLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.patchFileLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patchFileLabel.ForeColor = System.Drawing.Color.White;
-            this.patchFileLabel.Location = new System.Drawing.Point(239, 171);
+            this.patchFileLabel.Location = new System.Drawing.Point(239, 189);
             this.patchFileLabel.Name = "patchFileLabel";
             this.patchFileLabel.Size = new System.Drawing.Size(65, 13);
             this.patchFileLabel.TabIndex = 6;
@@ -132,7 +133,7 @@ namespace FlashPatch {
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(316, 197);
+            this.ClientSize = new System.Drawing.Size(316, 213);
             this.Controls.Add(this.patchFileLabel);
             this.Controls.Add(this.githubLabel);
             this.Controls.Add(this.descriptionLabel);
