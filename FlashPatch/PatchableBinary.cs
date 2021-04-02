@@ -5,25 +5,40 @@ namespace FlashPatch {
     public class PatchableBinary {
 
         private string name;
-        private string fileName;
         private string version;
         private bool x64;
         private long fileSize;
+        private List<string> filenames;
         private List<HexPatch> patches;
         private List<string> alternatePaths;
 
-        public PatchableBinary(string name, string fileName, string version, bool x64, long fileSize, List<HexPatch> patches, List<string> alternatePaths) {
+        public PatchableBinary(string name, string version, bool x64, long fileSize, List<string> filenames, List<HexPatch> patches, List<string> alternatePaths) {
             this.name = name;
-            this.fileName = fileName;
             this.version = version;
             this.x64 = x64;
             this.fileSize = fileSize;
+            this.filenames = filenames;
             this.patches = patches;
             this.alternatePaths = alternatePaths;
         }
 
-        public PatchableBinary(string name, string fileName, string version, bool x64, long fileSize, List<HexPatch> patches) :
-            this(name, fileName, version, x64, fileSize, patches, new List<string>()) {
+        public PatchableBinary(string name, string version, bool x64, long fileSize, List<HexPatch> patches) :
+            this(name, version, x64, fileSize, null, patches, new List<string>()) {
+            // Empty.
+        }
+
+        public PatchableBinary(string name, string version, bool x64, long fileSize, List<string> filenames, List<HexPatch> patches) :
+            this(name, version, x64, fileSize, filenames, patches, new List<string>()) {
+            // Empty.
+        }
+
+        public PatchableBinary(string name, string filename, string version, bool x64, long fileSize, List<HexPatch> patches, List<string> alternatePaths) :
+            this(name, version, x64, fileSize, new List<string>() { filename }, patches, alternatePaths) {
+            // Empty.
+        }
+
+        public PatchableBinary(string name, string filename, string version, bool x64, long fileSize, List<HexPatch> patches) :
+            this(name, version, x64, fileSize, new List<string>() { filename }, patches, new List<string>()) {
             // Empty.
         }
 
@@ -31,12 +46,12 @@ namespace FlashPatch {
             return name;
         }
 
-        public string GetFileName() {
-            return fileName;
+        public List<string> GetFilenames() {
+            return filenames;
         }
 
-        public bool HasFileName() {
-            return !string.IsNullOrWhiteSpace(fileName);
+        public bool HasFilenames() {
+            return filenames != null;
         }
 
         public string GetVersion() {
@@ -67,8 +82,8 @@ namespace FlashPatch {
             return alternatePaths;
         }
 
-        public string GetBackupFileName() {
-            return string.Format("{0}.bak_{1}", fileName, x64 ? "x64" : "x86");
+        public string GetBackupFileName(string filename) {
+            return string.Format("{0}.bak_{1}", filename, x64 ? "x64" : "x86");
         }
 
         public bool IsPatchable(FileStream file) {

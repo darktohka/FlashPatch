@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
@@ -28,7 +28,8 @@ namespace FlashPatch {
                 new List<string>() {
                     Path.Combine(GetLocalAppdata(), "Google", "Chrome", "User Data", "PepperFlash", "32.0.0.465", "pepflashplayer.dll"),
                     Path.Combine(GetLocalAppdata(), "Microsoft", "Edge", "User Data", "PepperFlash", "32.0.0.465", "pepflashplayer.dll")
-                }),
+                }
+            ),
             new PatchableBinary(
                 "Firefox 64-bit Plugin (NPAPI)", "NPSWF64_32_0_0_465.dll", "32,0,0,465", true, 26911800, new List<HexPatch>() {
                 new HexPatch(
@@ -53,7 +54,7 @@ namespace FlashPatch {
                 )
             }),
             new PatchableBinary(
-                "IE 64-bit Plugin (ActiveX)", "Flash.ocx", "32,0,0,445", true, 28979096, new List<HexPatch>() {
+                "IE 64-bit Plugin (ActiveX)", "32,0,0,445", true, 28979096, new List<string>() { "Flash.ocx", "Flash64_32_0_0_445.ocx" }, new List<HexPatch>() {
                 new HexPatch(
                     0x2A666C,
                     new byte[] { 0x84, 0xC0, 0x74 },
@@ -94,7 +95,7 @@ namespace FlashPatch {
                 )
             }),
             new PatchableBinary(
-                "IE 32-bit Plugin (ActiveX)", "Flash.ocx", "32,0,0,445", false, 22874520, new List<HexPatch>() {
+                "IE 32-bit Plugin (ActiveX)", "32,0,0,445", false, 22874520, new List<string>() { "Flash.ocx", "Flash32_32_0_0_445.ocx" }, new List<HexPatch>() {
                 new HexPatch(
                     0x2A0C9B,
                     new byte[] { 0x84, 0xC0, 0x74 },
@@ -114,7 +115,7 @@ namespace FlashPatch {
             new PatchableBinary(
                 // WARNING: This binary can only be applied using the "Patch File..." option
                 // Filename: NPSWF32_32_0_0_465.dll
-                "Firefox 32-bit Debug Plugin (NPAPI)", null, "32,0,0,465", false, 21235768, new List<HexPatch>() {
+                "Firefox 32-bit Debug Plugin (NPAPI)", "32,0,0,465", false, 21235768, new List<HexPatch>() {
                 new HexPatch(
                     0x2E44E5,
                     new byte[] { 0x84, 0xC0, 0x74 },
@@ -139,7 +140,7 @@ namespace FlashPatch {
             new PatchableBinary(
                 // WARNING: This binary can only be applied using the "Patch File..." option
                 // Filename: libflashplayer.so
-                "Linux 64-bit Firefox Plugin (NPAPI)", null, "32,0,0,465", true, 16653576, new List<HexPatch>() {
+                "Linux 64-bit Firefox Plugin (NPAPI)", "32,0,0,465", true, 16653576, new List<HexPatch>() {
                 new HexPatch(
                     0x591EB5,
                     new byte[] { 0x84, 0xC0, 0x0F, 0x84, 0x9B, 0x01 },
@@ -164,7 +165,7 @@ namespace FlashPatch {
             new PatchableBinary(
                 // WARNING: This binary can only be applied using the "Patch File..." option
                 // Filename: libpepflashplayer.so
-                "Linux 64-bit Chrome Plugin (PPAPI)", null, "32,0,0,465", true, 19509216, new List<HexPatch>() {
+                "Linux 64-bit Chrome Plugin (PPAPI)", "32,0,0,465", true, 19509216, new List<HexPatch>() {
                 new HexPatch(
                     0x24B62A,
                     new byte[] { 0x84, 0xC0, 0x0F, 0x85, 0x2E, 0x02, 0x00, 0x00 },
@@ -194,7 +195,7 @@ namespace FlashPatch {
             new PatchableBinary(
                 // WARNING: This binary can only be applied using the "Patch File..." option
                 // Filename: libflashplayer.so
-                "Linux 32-bit Firefox Plugin (NPAPI)", null, "32,0,0,465", false, 15093756, new List<HexPatch>() {
+                "Linux 32-bit Firefox Plugin (NPAPI)", "32,0,0,465", false, 15093756, new List<HexPatch>() {
                 new HexPatch(
                     0x4AC0D1,
                     new byte[] { 0x84, 0xC0, 0x0F, 0x84, 0xAC, 0x01 },
@@ -219,7 +220,7 @@ namespace FlashPatch {
             new PatchableBinary(
                 // WARNING: This binary can only be applied using the "Patch File..." option
                 // Filename: libpepflashplayer.so
-                "Linux 32-bit Chrome Plugin (PPAPI)", null, "32,0,0,465", false, 16000716, new List<HexPatch>() {
+                "Linux 32-bit Chrome Plugin (PPAPI)", "32,0,0,465", false, 16000716, new List<HexPatch>() {
                 new HexPatch(
                     0xCA080,
                     new byte[] { 0x84, 0xC0, 0x0F, 0x85, 0x46, 0x02, 0x00, 0x00 },
@@ -249,7 +250,7 @@ namespace FlashPatch {
             new PatchableBinary(
                 // WARNING: This binary can only be applied using the "Patch File..." option
                 // Filename: PepperFlashPlayer
-                "Mac 64-bit Chrome Plugin (PPAPI)", null, "32,0,0,465", true, 27794224, new List<HexPatch>() {
+                "Mac 64-bit Chrome Plugin (PPAPI)", "32,0,0,465", true, 27794224, new List<HexPatch>() {
                 new HexPatch(
                     0x4FF9C,
                     new byte[] { 0x84, 0xC0, 0x74 },
@@ -274,7 +275,7 @@ namespace FlashPatch {
             new PatchableBinary(
                 // WARNING: This binary can only be applied using the "Patch File..." option
                 // Filename: FlashPlayer-10.6
-                "Mac 64-bit Firefox Plugin (NPAPI)", null, "32,0,0,465", true, 29359280, new List<HexPatch>() {
+                "Mac 64-bit Firefox Plugin (NPAPI)", "32,0,0,465", true, 29359280, new List<HexPatch>() {
                 new HexPatch(
                     0x3E573B,
                     new byte[] { 0x84, 0xC0, 0x74 },
@@ -297,7 +298,95 @@ namespace FlashPatch {
                 )
             }),
             new PatchableBinary(
-                "Generic Flash Player Binary", null, null, false, -1, new List<HexPatch>() {
+                "Chinese Chrome 32-bit Plugin (Pepper)", "pepflashplayer32_34_0_0_118.dll", "34,0,0,118", false, 8908984, new List<HexPatch>() {
+                new HexPatch(
+                    0x257E18,
+                    new byte[] { 0x56, 0x8B, 0xF1, 0x57, 0x8B, 0x7C },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                )
+            }),
+            new PatchableBinary(
+                "Chinese Chrome 64-bit Plugin (Pepper)", "pepflashplayer64_34_0_0_118.dll", "34,0,0,118", true, 15982776, new List<HexPatch>() {
+                new HexPatch(
+                    0x414A30,
+                    new byte[] { 0x48, 0x89, 0x5C, 0x24, 0x08, 0x57 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                )
+            }),
+            new PatchableBinary(
+                "Chinese Firefox 32-bit Plugin (NPAPI)", "NPSWF32_34_0_0_118.dll", "34,0,0,118", false, 9824952, new List<HexPatch>() {
+                new HexPatch(
+                    0x295F24,
+                    new byte[] { 0x55, 0x8B, 0xEC, 0x56, 0x8B, 0xF1 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                )
+            }),
+            new PatchableBinary(
+                "Chinese Firefox 64-bit Plugin (NPAPI)", "NPSWF64_34_0_0_118.dll", "34,0,0,118", true, 12080824, new List<HexPatch>() {
+                new HexPatch(
+                    0x33B7E0,
+                    new byte[] { 0x48, 0x89, 0x5C, 0x24, 0x08, 0x57 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                )
+            }),
+            new PatchableBinary(
+                "Chinese IE 32-bit Plugin (ActiveX)", "Flash32_34_0_0_118.ocx", "34,0,0,118", false, 11804344, new List<HexPatch>() {
+                new HexPatch(
+                    0x15E8C0,
+                    new byte[] { 0x55, 0x8B, 0xEC, 0x56, 0x8B, 0xF1 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                )
+            }),
+            new PatchableBinary(
+                "Chinese IE 64-bit Plugin (ActiveX)", "Flash64_34_0_0_118.ocx", "34,0,0,118", true, 13763768, new List<HexPatch>() {
+                new HexPatch(
+                    0x15F0D4,
+                    new byte[] { 0x48, 0x89, 0x5C, 0x24, 0x08, 0x57 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                )
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: libflashplayer.so
+                "Chinese Linux 32-bit Firefox Plugin (NPAPI)", "34,0,0,118", false, 15663680, new List<HexPatch>() {
+                new HexPatch(
+                    0x4F3F00,
+                    new byte[] { 0x56, 0x53, 0x83, 0xEC, 0x14, 0x8B },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                )
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: libflashplayer.so
+                "Chinese Linux 64-bit Firefox Plugin (NPAPI)", "34,0,0,118", true, 17143256, new List<HexPatch>() {
+                new HexPatch(
+                    0x608660,
+                    new byte[] { 0x55, 0x48, 0x89, 0xF5, 0x53, 0x48 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                )
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: libpepflashplayer.so
+                "Chinese Linux 32-bit Chrome Plugin (PPAPI)", "34,0,0,118", false, 13503988, new List<HexPatch>() {
+                new HexPatch(
+                    0x5AB0F0,
+                    new byte[] { 0x55, 0x89, 0xE5, 0x57, 0x56, 0x53 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                )
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: libpepflashplayer.so
+                "Chinese Linux 64-bit Chrome Plugin (PPAPI)", "34,0,0,118", true, 16742160, new List<HexPatch>() {
+                new HexPatch(
+                    0x704450,
+                    new byte[] { 0x48, 0x89, 0x5C, 0x24, 0xF0, 0x48 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                )
+            }),
+            new PatchableBinary(
+                "Generic Flash Player Binary", null, false, -1, new List<HexPatch>() {
                 new HexPatch(
                     -1,
                     new byte[] { 0x00, 0x00, 0x40, 0x46, 0x3E, 0x6F, 0x77, 0x42 },
@@ -368,6 +457,9 @@ namespace FlashPatch {
         }
 
         private static void TakeOwnership(string filename) {
+            // Remove read-only attribute
+            File.SetAttributes(filename, File.GetAttributes(filename) & ~FileAttributes.ReadOnly);
+
             FileSecurity security = new FileSecurity();
 
             SecurityIdentifier sid = WindowsIdentity.GetCurrent().User;
@@ -427,7 +519,7 @@ namespace FlashPatch {
             bool madeBackupFolder = false;
 
             foreach (PatchableBinary binary in binaries) {
-                if (!binary.HasFileName()) {
+                if (!binary.HasFilenames()) {
                     // This is a special binary, as we do not specifically look for it.
                     // This binary can only be patched using the "Patch File..." option
                     continue;
@@ -441,72 +533,74 @@ namespace FlashPatch {
                 }
 
                 string name = binary.GetName();
-                List<string> paths = new List<string>();
-
-                paths.Add(Path.Combine(binaryX64 ? flashDir64 : flashDir32, binary.GetFileName()));
-                paths.AddRange(binary.GetAlternatePaths());
-
                 bool found = false;
 
-                foreach (string path in paths) {
-                    if (!File.Exists(path)) {
-                        continue;
-                    }
+                foreach (string filename in binary.GetFilenames()) {
+                    List<string> paths = new List<string>();
 
-                    found = true;
-                    string version = GetVersion(path);
+                    paths.Add(Path.Combine(binaryX64 ? flashDir64 : flashDir32, filename));
+                    paths.AddRange(binary.GetAlternatePaths());
 
-                    if (!binary.GetVersion().Equals(version)) {
-                        // We've encountered an incompatible version.
-                        incompatibleVersion.Add(string.Format("{0} ({1})", name, version));
-                        continue;
-                    }
+                    foreach (string path in paths) {
+                        if (!File.Exists(path)) {
+                            continue;
+                        }
 
-                    long size = new FileInfo(path).Length;
+                        found = true;
+                        string version = GetVersion(path);
 
-                    if (binary.GetFileSize() != size) {
-                        // This file's size does not match the expected file size.
-                        incompatibleSize.Add(name);
-                        continue;
-                    }
+                        if (!binary.GetVersion().Equals(version)) {
+                            // We've encountered an incompatible version.
+                            incompatibleVersion.Add(string.Format("{0} ({1})", name, version));
+                            continue;
+                        }
 
-                    try {
-                        TakeOwnership(path);
-                    } catch {
-                        // We failed to get ownership of the file...
-                        // No continue here, we still want to try to patch the file
-                        ownershipFailed.Add(name);
-                    }
+                        long size = new FileInfo(path).Length;
 
-                    try {
-                        using (FileStream fileStream = File.Open(path, FileMode.Open, FileAccess.Read)) {
-                            if (!binary.IsPatchable(fileStream)) {
-                                // This binary has already been patched.
-                                alreadyPatched.Add(name);
-                                continue;
+                        if (binary.GetFileSize() != size) {
+                            // This file's size does not match the expected file size.
+                            incompatibleSize.Add(name);
+                            continue;
+                        }
+
+                        try {
+                            TakeOwnership(path);
+                        } catch {
+                            // We failed to get ownership of the file...
+                            // No continue here, we still want to try to patch the file
+                            ownershipFailed.Add(name);
+                        }
+
+                        try {
+                            using (FileStream fileStream = File.Open(path, FileMode.Open, FileAccess.Read)) {
+                                if (!binary.IsPatchable(fileStream)) {
+                                    // This binary has already been patched.
+                                    alreadyPatched.Add(name);
+                                    continue;
+                                }
                             }
-                        }
 
-                        if (!madeBackupFolder && !Directory.Exists(backupFolder)) {
-                            Directory.CreateDirectory(backupFolder);
-                            madeBackupFolder = true;
-                        }
+                            if (!madeBackupFolder && !Directory.Exists(backupFolder)) {
+                                Directory.CreateDirectory(backupFolder);
+                                madeBackupFolder = true;
+                            }
 
-                        // Back up the current plugin to our backup folder
-                        File.Copy(path, Path.Combine(backupFolder, binary.GetBackupFileName()), true);
+                            // Back up the current plugin to our backup folder
+                            File.Copy(path, Path.Combine(backupFolder, binary.GetBackupFileName(filename)), true);
 
-                        using (FileStream fileStream = File.Open(path, FileMode.Open, FileAccess.ReadWrite)) {
-                            // Apply all pending binary patches!
-                            binary.PatchFile(fileStream);
-                        }
+                            using (FileStream fileStream = File.Open(path, FileMode.Open, FileAccess.ReadWrite)) {
+                                // Apply all pending binary patches!
+                                binary.PatchFile(fileStream);
+                            }
 
-                        patched.Add(name);
-                    } catch (Exception e) {
-                        if (IsSharingViolation(e)) {
-                            // This is a sharing violation; i.e. the file is currently being used.
-                            locked.Add(name);
-                        } else {
-                            errors.Add(e.Message);
+                            patched.Add(name);
+                        } catch (Exception e) {
+                            if (IsSharingViolation(e)) {
+                                // This is a sharing violation; i.e. the file is currently being used.
+                                locked.Add(name);
+                            } else {
+                                errors.Add(e.Message);
+                            }
                         }
                     }
                 }
@@ -681,7 +775,7 @@ namespace FlashPatch {
             List<string> errors = new List<string>();
 
             foreach (PatchableBinary binary in binaries) {
-                if (!binary.HasFileName()) {
+                if (!binary.HasFilenames()) {
                     continue;
                 }
 
@@ -692,24 +786,26 @@ namespace FlashPatch {
                     continue;
                 }
 
-                string backupPath = Path.Combine(backupFolder, binary.GetBackupFileName());
+                foreach (string filename in binary.GetFilenames()) {
+                    string backupPath = Path.Combine(backupFolder, binary.GetBackupFileName(filename));
 
-                if (!File.Exists(backupPath)) {
-                    continue;
-                }
+                    if (!File.Exists(backupPath)) {
+                        continue;
+                    }
 
-                string name = binary.GetName();
-                string path = Path.Combine(binaryX64 ? flashDir64 : flashDir32, binary.GetFileName());
+                    string name = binary.GetName();
+                    string path = Path.Combine(binaryX64 ? flashDir64 : flashDir32, filename);
 
-                try {
-                    File.Copy(backupPath, path, true);
-                    restored.Add(name);
-                } catch (Exception e) {
-                    if (IsSharingViolation(e)) {
-                        // This is a sharing violation; i.e. the file is currently being used.
-                        locked.Add(name);
-                    } else {
-                        errors.Add(e.Message);
+                    try {
+                        File.Copy(backupPath, path, true);
+                        restored.Add(name);
+                    } catch (Exception e) {
+                        if (IsSharingViolation(e)) {
+                            // This is a sharing violation; i.e. the file is currently being used.
+                            locked.Add(name);
+                        } else {
+                            errors.Add(e.Message);
+                        }
                     }
                 }
             }
