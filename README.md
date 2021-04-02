@@ -51,6 +51,10 @@ FlashPatch provides the following patches for this version:
   - Patch Chinese Enterprise phone-home service
   - Patch activation check
 
+Download clean builds of Flash 34.0.0.118:
+- [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.0)
+- [For Linux - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.1)
+
 ## Flash Player
 
 **But I want to play games using the standalone Flash Player!**
