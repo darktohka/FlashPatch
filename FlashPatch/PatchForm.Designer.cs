@@ -83,7 +83,7 @@ namespace FlashPatch {
             this.versionLabel.Name = "versionLabel";
             this.versionLabel.Size = new System.Drawing.Size(49, 25);
             this.versionLabel.TabIndex = 3;
-            this.versionLabel.Text = "v1.5";
+            this.versionLabel.Text = "v1.6";
             // 
             // descriptionLabel
             // 
