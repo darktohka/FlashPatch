@@ -123,10 +123,7 @@ namespace FlashPatch {
                 return;
             }
 
-            IntPtr wow64Value = IntPtr.Zero;
-
-            // Disable file system indirection (otherwise we can't read System32)
-            Wow64DisableWow64FsRedirection(ref wow64Value);
+            IntPtr redirection = DisableRedirection();
 
             string flashDir32 = GetFlashDir32();
 
@@ -225,7 +222,7 @@ namespace FlashPatch {
 
                         long size = new FileInfo(path).Length;
 
-                        if (binary.GetFileSize() != size) {
+                        if (binary.HasFileSize() && binary.GetFileSize() != size) {
                             // This file's size does not match the expected file size.
                             incompatibleSize.Add(name);
                             continue;
@@ -283,8 +280,7 @@ namespace FlashPatch {
                 }
             }
 
-            // Enable file system indirection.
-            Wow64RevertWow64FsRedirection(wow64Value);
+            EnableRedirection(redirection);
 
             StringBuilder report = new StringBuilder();
             MessageBoxIcon icon = MessageBoxIcon.Information;
@@ -407,6 +403,19 @@ namespace FlashPatch {
             MessageBox.Show(report.ToString(), "FlashPatch!", MessageBoxButtons.OK, icon);
         }
 
+        public static IntPtr DisableRedirection() {
+            IntPtr wow64Value = IntPtr.Zero;
+
+            // Disable file system indirection (otherwise we can't read System32)
+            Wow64DisableWow64FsRedirection(ref wow64Value);
+            return wow64Value;
+        }
+
+        public static void EnableRedirection(IntPtr wow64Value) {
+            // Enable file system indirection.
+            Wow64RevertWow64FsRedirection(wow64Value);
+        }
+
         public static void RestoreAll() {
             if (MessageBox.Show("Are you sure you want to restore your Flash Plugin backups?", "FlashPatch!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) {
                 return;
@@ -436,10 +445,7 @@ namespace FlashPatch {
                 return;
             }
 
-            IntPtr wow64Value = IntPtr.Zero;
-
-            // Disable file system indirection (otherwise we can't read System32)
-            Wow64DisableWow64FsRedirection(ref wow64Value);
+            IntPtr redirection = DisableRedirection();
 
             string flashDir32 = GetFlashDir32();
 
@@ -500,8 +506,7 @@ namespace FlashPatch {
                 }
             }
 
-            // Enable file system indirection.
-            Wow64RevertWow64FsRedirection(wow64Value);
+            EnableRedirection(redirection);
 
             StringBuilder report = new StringBuilder();
             MessageBoxIcon icon = MessageBoxIcon.Information;

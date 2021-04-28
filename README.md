@@ -19,7 +19,7 @@ It bypasses the January 12th, 2021 killswitch that prevents you from playing any
 | Google Chrome     | PPAPI (Pepper)   | 32.0.0.465 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :x:                      |
 | Mozilla Firefox   | NPAPI (Netscape) | 32.0.0.465 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
 | Safari            | NPAPI (Netscape) | 32.0.0.465 | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark:       | :heavy_check_mark: | :heavy_multiplication_x: |
-| Internet Explorer | ActiveX (OCX)    | 32.0.0.445 | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark: | :heavy_check_mark:       |
+| Internet Explorer | ActiveX (OCX)    | 32.0.0.465 | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark: | :heavy_check_mark:       |
 
 ✔️ means that the plugin is officially supported.
 
