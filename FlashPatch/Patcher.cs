@@ -205,6 +205,11 @@ namespace FlashPatch {
                     paths.AddRange(binary.GetAlternatePaths());
 
                     foreach (string path in paths) {
+                        // Remove our current binary from the not found list first.
+                        if (notFound.Contains(name)) {
+                            notFound.Remove(name);
+                        }
+
                         if (!File.Exists(path)) {
                             continue;
                         }
@@ -256,7 +261,9 @@ namespace FlashPatch {
                                 binary.PatchFile(fileStream);
                             }
 
-                            patched.Add(name);
+                            if (!patched.Contains(name)) {
+                                patched.Add(name);
+                            }
                         } catch (Exception e) {
                             if (IsSharingViolation(e)) {
                                 // This is a sharing violation; i.e. the file is currently being used.
@@ -269,7 +276,10 @@ namespace FlashPatch {
                 }
 
                 if (!found) {
-                    notFound.Add(name);
+                    // Add this binary to the not found list.
+                    if (!patched.Contains(name) && !notFound.Contains(name)) {
+                        notFound.Add(name);
+                    }
                 }
             }
 
