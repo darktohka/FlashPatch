@@ -81,9 +81,9 @@ namespace FlashPatch {
             this.versionLabel.ForeColor = System.Drawing.Color.White;
             this.versionLabel.Location = new System.Drawing.Point(220, 27);
             this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(49, 25);
+            this.versionLabel.Size = new System.Drawing.Size(56, 25);
             this.versionLabel.TabIndex = 3;
-            this.versionLabel.Text = "v1.6";
+            this.versionLabel.Text = "vDev";
             // 
             // descriptionLabel
             // 
@@ -146,6 +146,7 @@ namespace FlashPatch {
             this.Name = "PatchForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FlashPatch!";
+            this.Load += new System.EventHandler(this.PatchForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

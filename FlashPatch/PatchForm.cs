@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FlashPatch {
@@ -52,6 +53,35 @@ namespace FlashPatch {
             }
 
             Patcher.EnableRedirection(redirection);
+        }
+
+        private async void PatchForm_Load(object sender, EventArgs e) {
+            versionLabel.Text = UpdateChecker.GetCurrentVersion();
+            StartUpdateChecker();
+        }
+
+        private async void StartUpdateChecker() {
+#if !DEBUG
+            await Task.Run(UpdateChecker.GetLatestVersion).ContinueWith(result => {
+                Version version = result.Result;
+
+                if (version == null) {
+                    // We couldn't find the latest version.
+                    return;
+                }
+
+                if (version.GetVersion().Equals(UpdateChecker.GetCurrentVersion())) {
+                    // We're running the latest version!
+                    return;
+                }
+
+                string caption = "A new update is available for FlashPatch!\n\n" + version.GetName() + "\n\nWould you like to update now?";
+
+                if (MessageBox.Show(caption, "FlashPatch!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                    Process.Start(version.GetUrl());
+                }
+            });
+#endif
         }
     }
 }
