@@ -54,10 +54,10 @@ FlashPatch provides the following patches for this version:
   - Patch Chinese Enterprise phone-home service
   - Patch activation check
 
-Download clean builds of Flash 34.0.0.118:
-  - [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.0)
-  - [For Linux - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.1)
-  - [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.2)
+Download clean builds of Flash 34.0.0.137:
+  - [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.3)
+  - [For Linux - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.4)
+  - [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.5)
 
 ## Flash Player
 
