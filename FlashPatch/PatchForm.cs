@@ -38,6 +38,8 @@ namespace FlashPatch {
         }
 
         private void patchFileLabel_Click(object sender, EventArgs e) {
+            IntPtr redirection = Patcher.DisableRedirection();
+
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Select Flash Player binaries to patch!";
             dialog.Multiselect = true;
@@ -45,11 +47,11 @@ namespace FlashPatch {
 
             string[] paths = dialog.FileNames;
 
-            if (paths.Length == 0) {
-                return;
+            if (paths.Length != 0) {
+                Patcher.PatchFiles(paths);
             }
 
-            Patcher.PatchFiles(paths);
+            Patcher.EnableRedirection(redirection);
         }
     }
 }
