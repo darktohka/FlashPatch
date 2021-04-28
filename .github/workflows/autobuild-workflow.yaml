@@ -19,7 +19,7 @@ jobs:
         shell: powershell
         working-directory: FlashPatch
         run: >
-          msbuild /p:Configuration=Release /p:Platform=x86 /p:OutputPath=bin FlashPatch.csproj
+          msbuild /p:Configuration=Release /p:Platform="Any CPU" /p:OutputPath=bin FlashPatch.csproj
       - name: Sign executable
         shell: powershell
         working-directory: FlashPatch/bin
