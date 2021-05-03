@@ -170,7 +170,6 @@ namespace FlashPatch {
             List<string> alreadyPatched = new List<string>();
             List<string> notFound = new List<string>();
             List<string> incompatibleVersion = new List<string>();
-            List<string> incompatibleSize = new List<string>();
             List<string> ownershipFailed = new List<string>();
             List<string> locked = new List<string>();
             List<string> errors = new List<string>();
@@ -211,11 +210,11 @@ namespace FlashPatch {
                             continue;
                         }
 
-                        found = true;
                         string version = GetVersion(path);
 
                         if (!binary.GetVersion().Equals(version)) {
                             // We've encountered an incompatible version.
+                            found = true;
                             incompatibleVersion.Add(string.Format("{0} ({1})", name, version));
                             continue;
                         }
@@ -224,9 +223,10 @@ namespace FlashPatch {
 
                         if (binary.HasFileSize() && binary.GetFileSize() != size) {
                             // This file's size does not match the expected file size.
-                            incompatibleSize.Add(name);
                             continue;
                         }
+
+                        found = true;
 
                         try {
                             TakeOwnership(path);
@@ -289,11 +289,10 @@ namespace FlashPatch {
             AppendItems(report, "These plugins have already been patched:", alreadyPatched);
             AppendItems(report, "These plugins have not been found on your system:", notFound);
             AppendItems(report, "These plugins are incompatible with the patch because their version is outdated:", incompatibleVersion);
-            AppendItems(report, "These plugins are incompatible with the patch because their file size does not match:", incompatibleSize);
             AppendItems(report, "These plugins could not be patched because their respective browser is currently open:", locked);
             AppendItems(report, "Caught exceptions:", errors);
 
-            if (incompatibleVersion.Count > 0 || incompatibleSize.Count > 0 || locked.Count > 0 || errors.Count > 0) {
+            if (incompatibleVersion.Count > 0 || locked.Count > 0 || errors.Count > 0) {
                 icon = MessageBoxIcon.Warning;
                 report.AppendLine("Errors have been encountered during the patching process.\nPlease try again after reading the message above carefully.\nIf the browser you're using has been patched successfully, then no more action is required.");
             } else if (patched.Count > 0) {
