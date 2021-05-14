@@ -147,13 +147,13 @@ namespace FlashPatch {
             foreach (string service in telemetryServices) {
                 try {
                     ChangeServiceStartMode(service, "Disabled");
-                } catch (Exception e) {
+                } catch (Exception) {
                     // It's fine if this doesn't work
                 }
 
                 try {
                     StopService(service);
-                } catch (Exception e) {
+                } catch (Exception) {
                     // It's fine if this doesn't work
                 }
             }
@@ -423,7 +423,7 @@ namespace FlashPatch {
             foreach (string service in telemetryServices) {
                 try {
                     ChangeServiceStartMode(service, "Automatic");
-                } catch (Exception e) {
+                } catch (Exception) {
                     // It's fine if this doesn't work
                 }
             }
@@ -431,7 +431,7 @@ namespace FlashPatch {
             foreach (string telemetryApp in telemetryApps) {
                 try {
                     RestoreExecution(telemetryApp);
-                } catch (Exception e) {
+                } catch (Exception) {
                     // It's fine if this doesn't work.
                     // This means that the redirection has been removed.
                 }
