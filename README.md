@@ -2,7 +2,7 @@
 
 [![Patreon](https://img.shields.io/badge/Kofi-donate-purple.svg)](https://ko-fi.com/disyer) [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/darktohka/FlashPatch/blob/master/LICENSE)
 
-![Image of FlashPatch](https://i.imgur.com/73b7cb9.png)
+![Image of FlashPatch](https://i.imgur.com/aRfvMB5.png)
 
 [Download latest version](https://github.com/darktohka/FlashPatch/releases/latest)
 
@@ -33,19 +33,20 @@ It bypasses the January 12th, 2021 killswitch that prevents you from playing any
 
 | Browser           | Plugin API       | Version    | Windows                  | Linux                    | Mac                      | 64-bit             | 32-bit                   |
 | ----------------- | ---------------- | ---------- | ------------------------ | ------------------------ | ------------------------ | ------------------ | ------------------------ |
-| Google Chrome     | PPAPI (Pepper)   | 34.0.0.137 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
-| Mozilla Firefox   | NPAPI (Netscape) | 34.0.0.137 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
-| Safari            | NPAPI (Netscape) | 34.0.0.137 | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark:       | :heavy_check_mark: | :heavy_multiplication_x: |
-| Internet Explorer | ActiveX (OCX)    | 34.0.0.137 | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark: | :heavy_check_mark:       |
+| Google Chrome     | PPAPI (Pepper)   | 34.0.0.155 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
+| Mozilla Firefox   | NPAPI (Netscape) | 34.0.0.155 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
+| Safari            | NPAPI (Netscape) | 34.0.0.155 | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark:       | :heavy_check_mark: | :heavy_multiplication_x: |
+| Internet Explorer | ActiveX (OCX)    | 34.0.0.155 | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark: | :heavy_check_mark:       |
 
 Old Chinese Flash versions supported:
+  - Version 34.0.0.137
   - Version 34.0.0.118
 
 While Adobe has completely stopped updating the global version of Adobe Flash Player, it continues to maintain an enterprise version of Adobe Flash for Mainland China. This version is completely compatible with the global version of Flash, but contains a non-closable process, known as the "Flash Helper Service", that collects private information and pops up advertisement window contents.
 
 This special version of Flash normally only works within Mainland China. Furthermore, if it detects an enterprise environment (an Active Directory environment) it refuses to start without special registration on the Flash.cn service. It also contains a dormant killswitch.
 
-FlashPatch fully supports the latest version of the Chinese Flash Player browser plugin: 34.0.0.137.
+FlashPatch fully supports the latest version of the Chinese Flash Player browser plugin: 34.0.0.155.
 
 FlashPatch provides the following patches for this version:
   - Patch Chinese region lock on runtime (geo2.adobe.com)
@@ -54,10 +55,10 @@ FlashPatch provides the following patches for this version:
   - Patch Chinese Enterprise phone-home service
   - Patch activation check
 
-Download clean builds of Flash 34.0.0.137:
-  - [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.3)
-  - [For Linux - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.4)
-  - [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.5)
+Download clean builds of Flash 34.0.0.155:
+  - [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.6)
+  - [For Linux - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.7)
+  - [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.8)
 
 ## Flash Player
 
