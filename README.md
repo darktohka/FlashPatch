@@ -6,6 +6,8 @@
 
 [Download latest version](https://github.com/darktohka/FlashPatch/releases/latest)
 
+**[Check out Clean Flash Player, the brand new distribution of Flash Player that keeps Flash Player alive in the browser!](https://github.com/CleanFlash/installer) Clean Flash is built using the proven FlashPatch utility, and is the de-facto best and user-friendliest way to install Flash Player on Windows to date!**
+
 ## What's this?
 
 FlashPatch! is a tool that modifies the Flash Player installation on your computer, making it possible to play games in the browser again.
