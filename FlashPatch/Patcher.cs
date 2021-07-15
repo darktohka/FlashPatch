@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using Microsoft.Win32;
 using System.Management;
 using System.ServiceProcess;
+using System.Linq;
 
 namespace FlashPatch {
     public class Patcher {
@@ -201,11 +202,6 @@ namespace FlashPatch {
                     paths.AddRange(binary.GetAlternatePaths());
 
                     foreach (string path in paths) {
-                        // Remove our current binary from the not found list first.
-                        if (notFound.Contains(name)) {
-                            notFound.Remove(name);
-                        }
-
                         if (!File.Exists(path)) {
                             continue;
                         }
@@ -272,11 +268,9 @@ namespace FlashPatch {
                     }
                 }
 
-                if (!found) {
+                if (!found && !notFound.Contains(name)) {
                     // Add this binary to the not found list.
-                    if (!patched.Contains(name) && !notFound.Contains(name)) {
-                        notFound.Add(name);
-                    }
+                    notFound.Add(name);
                 }
             }
 
@@ -284,6 +278,10 @@ namespace FlashPatch {
 
             StringBuilder report = new StringBuilder();
             MessageBoxIcon icon = MessageBoxIcon.Information;
+
+            alreadyPatched = alreadyPatched.Except(patched).ToList();
+            notFound = notFound.Except(patched).Except(alreadyPatched).ToList();
+            incompatibleVersion = incompatibleVersion.Except(patched).Except(alreadyPatched).ToList();
 
             AppendItems(report, "Successfully patched these plugins:", patched);
             AppendItems(report, "These plugins have already been patched:", alreadyPatched);
