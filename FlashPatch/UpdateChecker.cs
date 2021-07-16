@@ -32,7 +32,7 @@ namespace FlashPatch {
     }
 
     public class UpdateChecker {
-        private static readonly string VERSION = "v1.9";
+        private static readonly string VERSION = "v1.9.1";
         private static readonly string AUTHOR = "darktohka";
         private static readonly string REPO = "FlashPatch";
         private static readonly string USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
