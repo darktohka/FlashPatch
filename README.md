@@ -48,7 +48,7 @@ Old Chinese Flash versions supported:
 
 While Adobe has completely stopped updating the global version of Adobe Flash Player, they are still maintaining a special version of Adobe Flash for Mainland China only. This version is completely compatible with the global version of Flash, but contains a non-closable process, known as the "Flash Helper Service", that collects private information and pops up advertisement window contents.
 
-This version of Flash normally only works within Mainland China. Furthermore, in order to let business users to purchase enterprise edition of Adobe Flash, if it detects an enterprise environment (an Active Directory environment) it refuses to start. It also contains a dormant killswitch. 
+This version of Flash normally only works within Mainland China. Furthermore, in order to let business users to purchase [enterprise edition of Adobe Flash](https://www.flash.cn/enterprise/index), if it detects an enterprise environment (an Active Directory environment) it refuses to start. It also contains a dormant killswitch. 
 
 FlashPatch fully supports the latest version of the Chinese Flash Player browser plugin: 34.0.0.175.
 
