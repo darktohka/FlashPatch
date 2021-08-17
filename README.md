@@ -31,7 +31,7 @@ It bypasses the January 12th, 2021 killswitch that prevents you from playing any
 
 **A generic patch is also available that is version independent. To try this patch, use the `Patch File...` button and manually choose the Flash binary you wish to patch.**
 
-## China-specific Enterprise Flash
+## China-specific Flash
 
 | Browser           | Plugin API       | Version    | Windows                  | Linux                    | Mac                      | 64-bit             | 32-bit                   |
 | ----------------- | ---------------- | ---------- | ------------------------ | ------------------------ | ------------------------ | ------------------ | ------------------------ |
