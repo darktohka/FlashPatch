@@ -31,7 +31,7 @@ It bypasses the January 12th, 2021 killswitch that prevents you from playing any
 
 **A generic patch is also available that is version independent. To try this patch, use the `Patch File...` button and manually choose the Flash binary you wish to patch.**
 
-## China-specific Enterprise Flash
+## China-specific Flash
 
 | Browser           | Plugin API       | Version    | Windows                  | Linux                    | Mac                      | 64-bit             | 32-bit                   |
 | ----------------- | ---------------- | ---------- | ------------------------ | ------------------------ | ------------------------ | ------------------ | ------------------------ |
@@ -46,15 +46,15 @@ Old Chinese Flash versions supported:
   - Version 34.0.0.137
   - Version 34.0.0.118
 
-While Adobe has completely stopped updating the global version of Adobe Flash Player, it continues to maintain an enterprise version of Adobe Flash for Mainland China. This version is completely compatible with the global version of Flash, but contains a non-closable process, known as the "Flash Helper Service", that collects private information and pops up advertisement window contents.
+While Adobe has completely stopped updating the global version of Adobe Flash Player, they are still maintaining a special version of Adobe Flash for Mainland China only. This version is completely compatible with the global version of Flash, but contains a non-closable process, known as the "Flash Helper Service", that collects private information and pops up advertisement window contents.
 
-This special version of Flash normally only works within Mainland China. Furthermore, if it detects an enterprise environment (an Active Directory environment) it refuses to start without special registration on the Flash.cn service. It also contains a dormant killswitch.
+This version of Flash normally only works within Mainland China. Furthermore, in order to let business users to purchase a China-specific enterprise edition of Adobe Flash, if it detects an enterprise environment (an Active Directory environment) it refuses to start. It also contains a dormant killswitch.
 
 FlashPatch fully supports the latest version of the Chinese Flash Player browser plugin: 34.0.0.175.
 
 FlashPatch provides the following patches for this version:
   - Patch Chinese region lock on runtime (geo2.adobe.com)
-  - Remove dependence on Flash Center Chinese system service
+  - Remove dependence on adware "Flash Helper Service"
   - Deactivate dormant OOD Macromedia XML killswitch
   - Patch Chinese Enterprise phone-home service
   - Patch activation check
@@ -80,11 +80,15 @@ You can download Adobe Flash Player 32.0.0.465 from [this archived link](https:/
 
 Unfortunately, the tool only works on Windows right now, but if you have a Windows machine, feel free to manually patch version 32.0.0.465 of `libpepflashplayer.so` or `libflashplayer.so`. You can then use these binaries on your Linux machine.
 
+Notice: Starting with Adobe Flash Player version 34, video playing function on Linux has dropped. If you need this feature please use 32.0.0.465 version instead.
+
 ## Windows XP
 
 **I need to use Flash Player on Windows XP!**
 
 FlashPatch is not compatible with Windows XP. FlashPatch relies on .NET Framework 4.5, but the last supported version of .NET Framework on Windows XP is [4.0.3](https://docs.microsoft.com/en-us/dotnet/framework/install/on-windows-xp#net-framework-403). Regardless, there is a way to keep using Flash on Windows XP. [Please check out the following instructions on GitHub.](https://github.com/darktohka/FlashPatch/issues/7#issuecomment-785096536)
+
+Notice: Starting with Adobe Flash Player version 34, video playing function on Windows XP has dropped. If you need this feature please use 32.0.0.465 version instead.
 
 ## Usage
 
