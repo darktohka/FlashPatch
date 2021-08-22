@@ -2,7 +2,7 @@
 
 [![Patreon](https://img.shields.io/badge/Kofi-donate-purple.svg)](https://ko-fi.com/disyer) [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/darktohka/FlashPatch/blob/master/LICENSE)
 
-![Image of FlashPatch](https://i.imgur.com/tFfm3T6.png)
+![Image of FlashPatch](https://i.imgur.com/nFQaYKs.png)
 
 [Download latest version](https://github.com/darktohka/FlashPatch/releases/latest)
 
@@ -35,12 +35,13 @@ It bypasses the January 12th, 2021 killswitch that prevents you from playing any
 
 | Browser           | Plugin API       | Version    | Windows                  | Linux                    | Mac                      | 64-bit             | 32-bit                   |
 | ----------------- | ---------------- | ---------- | ------------------------ | ------------------------ | ------------------------ | ------------------ | ------------------------ |
-| Google Chrome     | PPAPI (Pepper)   | 34.0.0.175 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
-| Mozilla Firefox   | NPAPI (Netscape) | 34.0.0.175 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
-| Safari            | NPAPI (Netscape) | 34.0.0.175 | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark:       | :heavy_check_mark: | :heavy_multiplication_x: |
-| Internet Explorer | ActiveX (OCX)    | 34.0.0.175 | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark: | :heavy_check_mark:       |
+| Google Chrome     | PPAPI (Pepper)   | 34.0.0.184 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
+| Mozilla Firefox   | NPAPI (Netscape) | 34.0.0.184 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
+| Safari            | NPAPI (Netscape) | 34.0.0.184 | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark:       | :heavy_check_mark: | :heavy_multiplication_x: |
+| Internet Explorer | ActiveX (OCX)    | 34.0.0.184 | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark: | :heavy_check_mark:       |
 
 Old Chinese Flash versions supported:
+  - Version 34.0.0.175
   - Version 34.0.0.164
   - Version 34.0.0.155
   - Version 34.0.0.137
@@ -50,7 +51,7 @@ While Adobe has completely stopped updating the global version of Adobe Flash Pl
 
 This version of Flash normally only works within Mainland China. Furthermore, in order to let business users to purchase a China-specific enterprise edition of Adobe Flash, if it detects an enterprise environment (an Active Directory environment) it refuses to start. It also contains a dormant killswitch.
 
-FlashPatch fully supports the latest version of the Chinese Flash Player browser plugin: 34.0.0.175.
+FlashPatch fully supports the latest version of the Chinese Flash Player browser plugin: 34.0.0.184.
 
 FlashPatch provides the following patches for this version:
   - Patch Chinese region lock on runtime (geo2.adobe.com)
@@ -59,10 +60,10 @@ FlashPatch provides the following patches for this version:
   - Patch Chinese Enterprise phone-home service
   - Patch activation check
 
-Download clean builds of Flash 34.0.0.175:
-  - [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.11)
+Download clean builds of Flash 34.0.0.184:
+  - [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.13)
   - [For Linux - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.7)
-  - [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.12)
+  - [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.14)
 
 ## Flash Player
 
@@ -80,7 +81,7 @@ You can download Adobe Flash Player 32.0.0.465 from [this archived link](https:/
 
 Unfortunately, the tool only works on Windows right now, but if you have a Windows machine, feel free to manually patch version 32.0.0.465 of `libpepflashplayer.so` or `libflashplayer.so`. You can then use these binaries on your Linux machine.
 
-Notice: Starting with Adobe Flash Player version 34, video playing function on Linux has dropped. If you need this feature please use 32.0.0.465 version instead.
+Notice: Starting with Adobe Flash Player version 34, video playing function on Linux has dropped. If you need this feature please use version 32.0.0.465 instead.
 
 ## Windows XP
 
@@ -88,7 +89,7 @@ Notice: Starting with Adobe Flash Player version 34, video playing function on L
 
 FlashPatch is not compatible with Windows XP. FlashPatch relies on .NET Framework 4.5, but the last supported version of .NET Framework on Windows XP is [4.0.3](https://docs.microsoft.com/en-us/dotnet/framework/install/on-windows-xp#net-framework-403). Regardless, there is a way to keep using Flash on Windows XP. [Please check out the following instructions on GitHub.](https://github.com/darktohka/FlashPatch/issues/7#issuecomment-785096536)
 
-Notice: Starting with Adobe Flash Player version 34, video playing function on Windows XP has dropped. If you need this feature please use 32.0.0.465 version instead.
+Notice: Starting with Adobe Flash Player version 34, video playing function on Windows XP has dropped. If you need this feature please use version 32.0.0.465 instead.
 
 ## Usage
 
