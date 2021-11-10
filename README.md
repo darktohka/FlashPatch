@@ -2,7 +2,7 @@
 
 [![Patreon](https://img.shields.io/badge/Kofi-donate-purple.svg)](https://ko-fi.com/disyer) [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/darktohka/FlashPatch/blob/master/LICENSE)
 
-![Image of FlashPatch](https://i.imgur.com/zRcoL1P.png)
+![Image of FlashPatch](https://i.imgur.com/xIBmbWK.png)
 
 [Download latest version](https://github.com/darktohka/FlashPatch/releases/latest)
 
@@ -64,11 +64,8 @@ FlashPatch provides the following patches for this version:
 
 Download clean builds of Flash 34.0.0.201:
   - [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.17)
-
-Download clean builds of Flash 34.0.0.192:
-  - [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.15)
   - [For Linux - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.7)
-  - [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.16)
+  - [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.18)
 
 ## Flash Player
 
