@@ -66,7 +66,7 @@ FlashPatch provides the following patches for this version:
 Download clean builds of Flash 34.0.0.209:
   - [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.19)
   - [For Linux - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.7)
-  - [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.20)
+  - [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.18)
 
 ## Flash Player
 
