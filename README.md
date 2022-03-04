@@ -2,7 +2,7 @@
 
 [![Patreon](https://img.shields.io/badge/Kofi-donate-purple.svg)](https://ko-fi.com/disyer) [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/darktohka/FlashPatch/blob/master/LICENSE)
 
-![Image of FlashPatch](https://i.imgur.com/egCvKY8.png)
+![Image of FlashPatch](https://i.imgur.com/9JvHUOh.png)
 
 [Download latest version](https://github.com/darktohka/FlashPatch/releases/latest)
 
