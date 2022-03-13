@@ -208,7 +208,7 @@ namespace FlashPatch {
 
                         string version = GetVersion(path);
 
-                        if (!binary.GetVersion().Equals(version)) {
+                        if (binary.HasVersion() && !binary.GetVersion().Equals(version)) {
                             // We've encountered an incompatible version.
                             found = true;
                             incompatibleVersion.Add(string.Format("{0} ({1})", name, version));
@@ -325,9 +325,15 @@ namespace FlashPatch {
                 }
 
                 bool complete = false;
+                string version = GetVersion(path);
 
                 foreach (PatchableBinary binary in Patches.GetBinaries()) {
                     if (binary.HasFileSize() && binary.GetFileSize() != size) {
+                        continue;
+                    }
+
+                    if (binary.HasVersion() && !binary.GetVersion().Equals(version)) {
+                        // We've encountered an incompatible version.
                         continue;
                     }
 

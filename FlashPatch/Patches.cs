@@ -107,16 +107,6 @@ namespace FlashPatch {
                 )
             }),
             new PatchableBinary(
-                // WARNING: A custom patch is not available for this version.
-                // FlashPatch will attempt to apply the generic Flash Player patch.
-                "IE 32-bit Plugin (ActiveX)", "Flash32_32_0_0_465.ocx", "32,0,0,465", false, -1, new List<HexPatch>() {
-                new HexPatch(
-                    -1,
-                    new byte[] { 0x00, 0x00, 0x40, 0x46, 0x3E, 0x6F, 0x77, 0x42 },
-                    new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x7F }
-                )
-            }),
-            new PatchableBinary(
                 // WARNING: This binary can only be applied using the "Patch File..." option
                 // Filename: NPSWF32_32_0_0_465.dll
                 "Firefox 32-bit Debug Plugin (NPAPI)", "32,0,0,465", false, 21235768, new List<HexPatch>() {
@@ -5484,6 +5474,16 @@ namespace FlashPatch {
             }),
             new PatchableBinary(
                 "Generic Flash Player Binary", null, false, -1, new List<HexPatch>() {
+                new HexPatch(
+                    -1,
+                    new byte[] { 0x00, 0x00, 0x40, 0x46, 0x3E, 0x6F, 0x77, 0x42 },
+                    new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x7F }
+                )
+            }),
+            new PatchableBinary(
+                // WARNING: A custom patch is not available for this version.
+                // FlashPatch will attempt to apply the generic Flash Player patch.
+                "IE 32-bit Plugin (ActiveX)", "Flash32_32_0_0_465.ocx", "32,0,0,465", false, -1, new List<HexPatch>() {
                 new HexPatch(
                     -1,
                     new byte[] { 0x00, 0x00, 0x40, 0x46, 0x3E, 0x6F, 0x77, 0x42 },
