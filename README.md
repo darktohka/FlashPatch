@@ -2,7 +2,7 @@
 
 [![Patreon](https://img.shields.io/badge/Kofi-donate-purple.svg)](https://ko-fi.com/disyer) [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/darktohka/FlashPatch/blob/master/LICENSE)
 
-![Image of FlashPatch](https://i.imgur.com/j7NUOM6.png)
+![Image of FlashPatch](https://i.imgur.com/un5lOEf.png)
 
 [Download latest version](https://github.com/darktohka/FlashPatch/releases/latest)
 
@@ -35,40 +35,44 @@ It bypasses the January 12th, 2021 killswitch that prevents you from playing any
 
 | Browser           | Plugin API       | Version    | Windows                  | Linux                    | Mac                      | 64-bit             | 32-bit                   |
 | ----------------- | ---------------- | ---------- | ------------------------ | ------------------------ | ------------------------ | ------------------ | ------------------------ |
-| Google Chrome     | PPAPI (Pepper)   | 34.0.0.231 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
-| Mozilla Firefox   | NPAPI (Netscape) | 34.0.0.231 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
-| Safari            | NPAPI (Netscape) | 34.0.0.231 | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark:       | :heavy_check_mark: | :heavy_multiplication_x: |
-| Internet Explorer | ActiveX (OCX)    | 34.0.0.231 | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark: | :heavy_check_mark:       |
+| Google Chrome     | PPAPI (Pepper)   | 34.0.0.242 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
+| Mozilla Firefox   | NPAPI (Netscape) | 34.0.0.242 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
+| Safari            | NPAPI (Netscape) | 34.0.0.242 | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark:       | :heavy_check_mark: | :heavy_multiplication_x: |
+| Internet Explorer | ActiveX (OCX)    | 34.0.0.242 | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark: | :heavy_check_mark:       |
 
 Old Chinese Flash versions supported:
-  - Version 34.0.0.211
-  - Version 34.0.0.209
-  - Version 34.0.0.201
-  - Version 34.0.0.192
-  - Version 34.0.0.184
-  - Version 34.0.0.175
-  - Version 34.0.0.164
-  - Version 34.0.0.155
-  - Version 34.0.0.137
-  - Version 34.0.0.118
+
+- Version 34.0.0.231
+- Version 34.0.0.211
+- Version 34.0.0.209
+- Version 34.0.0.201
+- Version 34.0.0.192
+- Version 34.0.0.184
+- Version 34.0.0.175
+- Version 34.0.0.164
+- Version 34.0.0.155
+- Version 34.0.0.137
+- Version 34.0.0.118
 
 While Adobe has completely stopped updating the global version of Adobe Flash Player, they are still maintaining a special version of Adobe Flash for Mainland China only. This version is completely compatible with the global version of Flash, but contains a non-closable process, known as the "Flash Helper Service", that collects private information and pops up advertisement window contents.
 
 This version of Flash normally only works within Mainland China. Furthermore, in order to let business users to purchase a China-specific enterprise edition of Adobe Flash, if it detects an enterprise environment (an Active Directory environment) it refuses to start. It also contains a dormant killswitch.
 
-FlashPatch fully supports the latest version of the Chinese Flash Player browser plugin: 34.0.0.231.
+FlashPatch fully supports the latest version of the Chinese Flash Player browser plugin: 34.0.0.242.
 
 FlashPatch provides the following patches for this version:
-  - Patch Chinese region lock on runtime (geo2.adobe.com)
-  - Remove dependence on adware "Flash Helper Service"
-  - Deactivate dormant OOD Macromedia XML killswitch
-  - Patch Chinese Enterprise phone-home service
-  - Patch activation check
 
-Download clean builds of Flash 34.0.0.231:
-  - [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.22)
-  - [For Linux - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.7)
-  - [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.23)
+- Patch Chinese region lock on runtime (geo2.adobe.com)
+- Remove dependence on adware "Flash Helper Service"
+- Deactivate dormant OOD Macromedia XML killswitch
+- Patch Chinese Enterprise phone-home service
+- Patch activation check
+
+Download clean builds of Flash 34.0.0.242:
+
+- [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.24)
+- [For Linux - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.7)
+- [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.25)
 
 ## Flash Player
 
