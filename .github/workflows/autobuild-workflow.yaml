@@ -4,10 +4,10 @@ on: [push, repository_dispatch, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Visual Studio
         uses: ilammy/msvc-dev-cmd@v1
       - name: Import certificate
@@ -25,7 +25,7 @@ jobs:
         working-directory: FlashPatch/bin
         run: >
           signtool sign /a /sm /tr "${{ secrets.SIGN_WIN_TIMESTAMP }}" /td sha256 /fd sha256 FlashPatch.exe
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: FlashPatch
           path: FlashPatch/bin/FlashPatch.exe
