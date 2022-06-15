@@ -1,0 +1,36 @@
+﻿<Window
+    x:Class="FlashPatch.PatchWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="FlashPatch!"
+    WindowStartupLocation="CenterScreen"
+    Loaded="Window_Loaded"
+    Background="#FF1E1E1E"
+    Width="354" Height="250" MinWidth="305" MinHeight="245" MaxWidth="531" MaxHeight="312"
+>
+    <Grid Margin="22,10">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,5">
+                <Label Content="FlashPatch!" Padding="0" VerticalAlignment="Top" FontSize="35" FontFamily="Segoe UI Semibold" Foreground="White"/>
+                <Label Content="vDev" x:Name="versionLabel" VerticalAlignment="Bottom" FontSize="19" FontWeight="Bold" Margin="5,0,0,0" Foreground="White"/>
+            </StackPanel>
+            <TextBlock TextAlignment="Center" TextWrapping="WrapWithOverflow" Foreground="White" FontSize="15">
+                Play Adobe Flash Player games in the browser after January 12th, 2021.
+                <LineBreak/>
+                Now supports Chinese Flash!
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                <Button Content="Patch" Style="{StaticResource DarkButton}" Margin="0,0,5,0" Padding="22,15" Click="PatchButton_Click" />
+                <Button Content="Restore" Style="{StaticResource DarkButton}" Margin="5,0,0,0" Padding="15" Click="RestoreButton_Click" />
+            </StackPanel>
+            <Grid>
+                <TextBlock HorizontalAlignment="Left" Style="{StaticResource TextButton}" MouseLeftButtonUp="GithubButton_Click">
+                    by darktohka - GitHub
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Right" Style="{StaticResource TextButton}" MouseLeftButtonUp="PatchFileButton_Click">
+                    Patch File...
+                </TextBlock>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

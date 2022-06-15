@@ -5,7 +5,7 @@ using System.IO;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Diagnostics;
-using System.Windows.Forms;
+using System.Windows;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 using System.Management;
@@ -59,7 +59,7 @@ namespace FlashPatch {
         }
 
         private static void ShowError(string message) {
-            MessageBox.Show(message, "FlashPatch!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(message, "FlashPatch!", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private static void AppendItems(StringBuilder builder, string message, List<string> items) {
@@ -112,15 +112,15 @@ namespace FlashPatch {
         }
 
         public static void PatchAll() {
-            if (MessageBox.Show("Are you sure you want to patch your system-wide Flash plugins to allow Flash games to be played in your browser?", "FlashPatch!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) {
+            if (MessageBox.Show("Are you sure you want to patch your system-wide Flash plugins to allow Flash games to be played in your browser?", "FlashPatch!", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes) {
                 return;
             }
 
-            if (MessageBox.Show("Have you closed ALL your browser windows yet?\n\nIf not, please close them right now!", "FlashPatch!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) {
+            if (MessageBox.Show("Have you closed ALL your browser windows yet?\n\nIf not, please close them right now!", "FlashPatch!", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes) {
                 return;
             }
 
-            if (MessageBox.Show("WARNING!\n\nThe developers of this program do not assume any responsibility for the usage of this tool.\n\nEven though the developers have tried their best to ensure the quality of this tool, it may introduce instability, or even crash your computer.\n\nAll changes made by the program may be reverted using the \"Restore\" button, but even this option is provided on a best-effort basis.\n\nAll responsibility falls upon your shoulders.\n\nEven so, are you sure you want to continue?", "FlashPatch!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) {
+            if (MessageBox.Show("WARNING!\n\nThe developers of this program do not assume any responsibility for the usage of this tool.\n\nEven though the developers have tried their best to ensure the quality of this tool, it may introduce instability, or even crash your computer.\n\nAll changes made by the program may be reverted using the \"Restore\" button, but even this option is provided on a best-effort basis.\n\nAll responsibility falls upon your shoulders.\n\nEven so, are you sure you want to continue?", "FlashPatch!", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) {
                 return;
             }
 
@@ -277,7 +277,7 @@ namespace FlashPatch {
             EnableRedirection(redirection);
 
             StringBuilder report = new StringBuilder();
-            MessageBoxIcon icon = MessageBoxIcon.Information;
+            MessageBoxImage icon = MessageBoxImage.Information;
 
             alreadyPatched = alreadyPatched.Except(patched).ToList();
             notFound = notFound.Except(patched).Except(alreadyPatched).ToList();
@@ -291,7 +291,7 @@ namespace FlashPatch {
             AppendItems(report, "Caught exceptions:", errors);
 
             if (incompatibleVersion.Count > 0 || locked.Count > 0 || errors.Count > 0) {
-                icon = MessageBoxIcon.Warning;
+                icon = MessageBoxImage.Warning;
                 report.AppendLine("Errors have been encountered during the patching process.\nPlease try again after reading the message above carefully.\nIf the browser you're using has been patched successfully, then no more action is required.");
             } else if (patched.Count > 0) {
                 report.AppendLine("CONGRATULATIONS! The patching process has completed as expected. Enjoy your Flash games!");
@@ -301,7 +301,7 @@ namespace FlashPatch {
                 report.AppendLine("No action has been taken.");
             }
 
-            MessageBox.Show(report.ToString(), "FlashPatch!", MessageBoxButtons.OK, icon);
+            MessageBox.Show(report.ToString(), "FlashPatch!", MessageBoxButton.OK, icon);
         }
 
         public static void PatchFiles(string[] paths) {
@@ -380,7 +380,7 @@ namespace FlashPatch {
             }
 
             StringBuilder report = new StringBuilder();
-            MessageBoxIcon icon = MessageBoxIcon.Information;
+            MessageBoxImage icon = MessageBoxImage.Information;
 
             AppendItems(report, "Successfully patched these binaries:", patched);
             AppendItems(report, "These binaries have already been patched:", alreadyPatched);
@@ -390,10 +390,10 @@ namespace FlashPatch {
             AppendItems(report, "Caught exceptions:", errors);
 
             if (locked.Count > 0 || errors.Count > 0) {
-                icon = MessageBoxIcon.Warning;
+                icon = MessageBoxImage.Warning;
                 report.AppendLine("Errors have been encountered during the patching process.\nPlease try again after reading the message above carefully.");
             } else if (notPatched.Count > 0) {
-                icon = MessageBoxIcon.Warning;
+                icon = MessageBoxImage.Warning;
                 report.AppendLine("Sorry, but we couldn't patch some of your binaries.");
             } else if (patched.Count > 0) {
                 report.AppendLine("Great work! All binaries have been successfully patched.");
@@ -403,7 +403,7 @@ namespace FlashPatch {
                 report.AppendLine("No action has been taken.");
             }
 
-            MessageBox.Show(report.ToString(), "FlashPatch!", MessageBoxButtons.OK, icon);
+            MessageBox.Show(report.ToString(), "FlashPatch!", MessageBoxButton.OK, icon);
         }
 
         public static IntPtr DisableRedirection() {
@@ -420,7 +420,7 @@ namespace FlashPatch {
         }
 
         public static void RestoreAll() {
-            if (MessageBox.Show("Are you sure you want to restore your Flash Plugin backups?", "FlashPatch!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) {
+            if (MessageBox.Show("Are you sure you want to restore your Flash Plugin backups?", "FlashPatch!", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes) {
                 return;
             }
 
@@ -512,14 +512,14 @@ namespace FlashPatch {
             EnableRedirection(redirection);
 
             StringBuilder report = new StringBuilder();
-            MessageBoxIcon icon = MessageBoxIcon.Information;
+            MessageBoxImage icon = MessageBoxImage.Information;
 
             AppendItems(report, "Successfully restored these plugins to their original, unpatched version:", restored);
             AppendItems(report, "These plugins could not be restored because their respective browser is currently open:", locked);
             AppendItems(report, "Caught exceptions:", errors);
 
             if (locked.Count > 0 || errors.Count > 0) {
-                icon = MessageBoxIcon.Warning;
+                icon = MessageBoxImage.Warning;
                 report.AppendLine("Errors have been encountered during the restoration process. Please try again after reading the message above carefully.");
             } else if (restored.Count > 0) {
                 report.AppendLine("All plugins have been restored from the previous backup!\nNo more action is necessary.");
@@ -528,7 +528,7 @@ namespace FlashPatch {
                 return;
             }
 
-            MessageBox.Show(report.ToString(), "FlashPatch!", MessageBoxButtons.OK, icon);
+            MessageBox.Show(report.ToString(), "FlashPatch!", MessageBoxButton.OK, icon);
         }
     }
 }
