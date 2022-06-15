@@ -6553,6 +6553,26 @@ namespace FlashPatch {
                 ),
             }),
             new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: FlashPlayer.exe
+                "Adobe Animate Flash Player", "35,0,0,0", true, 13168408, new List<HexPatch>() {
+                new HexPatch(
+                    0x7531A,
+                    new byte[] { 0x74, 0x28 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x75323,
+                    new byte[] { 0x75, 0x1F },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x251B84,
+                    new byte[] { 0x48, 0x89, 0x5C, 0x24, 0x08, 0x57 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
                 "Generic Flash Player Binary", null, false, -1, new List<HexPatch>() {
                 new HexPatch(
                     -1,
