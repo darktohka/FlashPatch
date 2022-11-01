@@ -24,7 +24,7 @@ jobs:
         shell: powershell
         working-directory: FlashPatch/bin
         run: >
-          signtool sign /a /sm /tr "${{ secrets.SIGN_WIN_TIMESTAMP }}" /td sha256 /fd sha256 FlashPatch.exe
+          signtool sign /a /sm /tr "${{ secrets.SIGN_WIN_TIMESTAMP }}" /td sha256 /fd sha256 /n "${{ secrets.SIGN_WIN_SUBJECT }}" FlashPatch.exe
       - uses: actions/upload-artifact@v3
         with:
           name: FlashPatch
