@@ -10,21 +10,18 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup Visual Studio
         uses: ilammy/msvc-dev-cmd@v1
-      - name: Import certificate
-        shell: bash
-        run: >
-          echo ${{ secrets.SIGN_WIN_CERT }} | base64 --decode > cert.pfx &&
-          powershell //C "\$Password = ConvertTo-SecureString ${{ secrets.SIGN_WIN_PASS }} -AsPlainText -Force; echo \$Password; Import-PfxCertificate -FilePath cert.pfx -CertStoreLocation Cert:\LocalMachine\My -Password \$Password"
       - name: Build executable
         shell: powershell
         working-directory: FlashPatch
         run: >
           msbuild /p:Configuration=Release /p:Platform="Any CPU" /p:OutputPath=bin FlashPatch.csproj
       - name: Sign executable
-        shell: powershell
+        shell: bash
         working-directory: FlashPatch/bin
         run: >
-          signtool sign /a /sm /tr "${{ secrets.SIGN_WIN_TIMESTAMP }}" /td sha256 /fd sha256 /n "${{ secrets.SIGN_WIN_SUBJECT }}" FlashPatch.exe
+          echo ${{ secrets.SIGN_WIN_CERT }} | base64 --decode > cert.pfx &&
+          signtool sign /a /sm /tr "${{ secrets.SIGN_WIN_TIMESTAMP }}" /td sha256 /fd sha256 /f cert.pfx /p "${{ secrets.SIGN_WIN_PASS }}" FlashPatch.exe &&
+          rm cert.pfx
       - uses: actions/upload-artifact@v3
         with:
           name: FlashPatch
