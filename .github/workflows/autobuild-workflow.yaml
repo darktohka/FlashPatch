@@ -15,12 +15,20 @@ jobs:
         working-directory: FlashPatch
         run: >
           msbuild /p:Configuration=Release /p:Platform="Any CPU" /p:OutputPath=bin FlashPatch.csproj
-      - name: Sign executable
+      - name: Import certificate
         shell: bash
         working-directory: FlashPatch/bin
         run: >
-          echo ${{ secrets.SIGN_WIN_CERT }} | base64 --decode > cert.pfx &&
-          signtool sign /a /sm /tr "${{ secrets.SIGN_WIN_TIMESTAMP }}" /td sha256 /fd sha256 /f cert.pfx /p "${{ secrets.SIGN_WIN_PASS }}" FlashPatch.exe &&
+          echo ${{ secrets.SIGN_WIN_CERT }} | base64 --decode > cert.pfx
+      - name: Sign executable
+        shell: powershell
+        working-directory: FlashPatch/bin
+        run: >
+          signtool sign /a /sm /tr "${{ secrets.SIGN_WIN_TIMESTAMP }}" /td sha256 /fd sha256 /f cert.pfx /p "${{ secrets.SIGN_WIN_PASS }}" FlashPatch.exe
+      - name: Remove certificate
+        shell: bash
+        working-directory: FlashPatch/bin
+        run: >
           rm cert.pfx
       - uses: actions/upload-artifact@v3
         with:
