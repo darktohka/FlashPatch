@@ -75,7 +75,7 @@ Download clean builds of Flash 34.0.0.277:
 
 - [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.30)
 - [For Linux - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.7)
-- [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.29)
+- [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.31)
 
 ## Flash Player
 
