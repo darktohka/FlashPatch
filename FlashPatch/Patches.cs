@@ -7519,11 +7519,27 @@ namespace FlashPatch {
             new PatchableBinary(
                 // Debug version
                 // Windows 8+ specific plugin
+                // This version has the time bomb enabled mistakenly by default
                 "Chinese IE 64-bit Plugin (ActiveX)", "Flash64_34_0_0_277.ocx", "34,0,0,277", true, 14691296, new List<HexPatch>() {
+                new HexPatch(
+                    0x8E0EC,
+                    new byte[] { 0x40, 0x53, 0x55, 0x56, 0x57, 0x41 },
+                    new byte[] { 0xB8, 0x00, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+                new HexPatch(
+                    0x8E1E8,
+                    new byte[] { 0x40, 0x53, 0x55, 0x56, 0x57, 0x41 },
+                    new byte[] { 0xB8, 0x00, 0x00, 0x00, 0x00, 0xC3 }
+                ),
                 new HexPatch(
                     0x161428,
                     new byte[] { 0x48, 0x89, 0x5C, 0x24, 0x08, 0x57 },
                     new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+                new HexPatch(
+                    0x16470F,
+                    new byte[] { 0xEB, 0x02 },
+                    new byte[] { 0x90, 0x90 }
                 ),
                 new HexPatch(
                     0x24DB71,
