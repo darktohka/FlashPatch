@@ -8208,6 +8208,7 @@ namespace FlashPatch {
                     new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
                 ),
                 new HexPatch(
+                    0x7CBB9,
                     new byte[] { 0x75 },
                     new byte[] { 0xEB }
                 ),
