@@ -8829,6 +8829,406 @@ namespace FlashPatch {
                 ),
             }),
             new PatchableBinary(
+                "Chinese Chrome 64-bit Plugin (Pepper)", "pepflashplayer64_34_0_0_295.dll", "34,0,0,295", true, 16089056, new List<HexPatch>() {
+                new HexPatch(
+                    0x217269,
+                    new byte[] { 0x74, 0x28 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x217272,
+                    new byte[] { 0x75, 0x1F },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x41A570,
+                    new byte[] { 0x48, 0x89, 0x5C, 0x24, 0x10, 0x57 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                // Debug version
+                "Chinese Chrome 64-bit Plugin (Pepper)", "pepflashplayer64_34_0_0_295.dll", "34,0,0,295", true, 17038304, new List<HexPatch>() {
+                new HexPatch(
+                    0x328A21,
+                    new byte[] { 0x74, 0x28 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x328A2A,
+                    new byte[] { 0x75, 0x1F },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x43C220,
+                    new byte[] { 0x48, 0x89, 0x5C, 0x24, 0x10, 0x57 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                "Chinese Chrome 32-bit Plugin (Pepper)", "pepflashplayer32_34_0_0_295.dll", "34,0,0,295", false, 8991200, new List<HexPatch>() {
+                new HexPatch(
+                    0x13F79F,
+                    new byte[] { 0x74, 0x23 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x13F7A8,
+                    new byte[] { 0x75, 0x1A },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x25A0C0,
+                    new byte[] { 0x53, 0x56, 0x8B, 0xF1, 0x57, 0x8B },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                // Debug version
+                "Chinese Chrome 32-bit Plugin (Pepper)", "pepflashplayer32_34_0_0_295.dll", "34,0,0,295", false, 9596384, new List<HexPatch>() {
+                new HexPatch(
+                    0x198CE5,
+                    new byte[] { 0x74, 0x23 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x198CEE,
+                    new byte[] { 0x75, 0x1A },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x25CE7F,
+                    new byte[] { 0x53, 0x56, 0x8B, 0xF1, 0x57, 0x8B },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                "Chinese Firefox 64-bit Plugin (NPAPI)", "NPSWF64_34_0_0_295.dll", "34,0,0,295", true, 12165600, new List<HexPatch>() {
+                new HexPatch(
+                    0x2FCBC9,
+                    new byte[] { 0x74, 0x28 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x2FCBD2,
+                    new byte[] { 0x75, 0x1F },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x33DA38,
+                    new byte[] { 0x48, 0x89, 0x5C, 0x24, 0x08, 0x48 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                // Debug version
+                "Chinese Firefox 64-bit Plugin (NPAPI)", "NPSWF64_34_0_0_295.dll", "34,0,0,295", true, 13155808, new List<HexPatch>() {
+                new HexPatch(
+                    0x31538F,
+                    new byte[] { 0x74, 0x28 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x315398,
+                    new byte[] { 0x75, 0x1F },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x357E48,
+                    new byte[] { 0x48, 0x89, 0x5C, 0x24, 0x08, 0x48 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                "Chinese Firefox 32-bit Plugin (NPAPI)", "NPSWF32_34_0_0_295.dll", "34,0,0,295", false, 9904608, new List<HexPatch>() {
+                new HexPatch(
+                    0x263AB1,
+                    new byte[] { 0x74, 0x23 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x263ABA,
+                    new byte[] { 0x75, 0x1A },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x297BAF,
+                    new byte[] { 0x55, 0x8B, 0xEC, 0x53, 0x56, 0x8B },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                // Debug version
+                "Chinese Firefox 32-bit Plugin (NPAPI)", "NPSWF32_34_0_0_295.dll", "34,0,0,295", false, 10725856, new List<HexPatch>() {
+                new HexPatch(
+                    0x2760C0,
+                    new byte[] { 0x74, 0x21 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x2760C9,
+                    new byte[] { 0x75, 0x18 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x2AB7FE,
+                    new byte[] { 0x55, 0x8B, 0xEC, 0x53, 0x56, 0x8B },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                "Chinese IE 64-bit Plugin (ActiveX)", "Flash64_34_0_0_295.ocx", "34,0,0,295", true, 12610016, new List<HexPatch>() {
+                new HexPatch(
+                    0x2FD779,
+                    new byte[] { 0x74, 0x28 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x2FD782,
+                    new byte[] { 0x75, 0x1F },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x33E2B8,
+                    new byte[] { 0x48, 0x89, 0x5C, 0x24, 0x08, 0x48 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                // Windows 8+ specific plugin
+                "Chinese IE 64-bit Plugin (ActiveX)", "Flash64_34_0_0_295.ocx", "34,0,0,295", true, 13851104, new List<HexPatch>() {
+                new HexPatch(
+                    0x161528,
+                    new byte[] { 0x48, 0x89, 0x5C, 0x24, 0x08, 0x48 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+                new HexPatch(
+                    0x2494B0,
+                    new byte[] { 0x74, 0x28 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x2494B9,
+                    new byte[] { 0x75, 0x1F },
+                    new byte[] { 0x90, 0x90 }
+                ),
+            }),
+            new PatchableBinary(
+                // Debug version
+                "Chinese IE 64-bit Plugin (ActiveX)", "Flash64_34_0_0_295.ocx", "34,0,0,295", true, 13587936, new List<HexPatch>() {
+                new HexPatch(
+                    0x3149FF,
+                    new byte[] { 0x74, 0x28 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x314A08,
+                    new byte[] { 0x75, 0x1F },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x3570A8,
+                    new byte[] { 0x48, 0x89, 0x5C, 0x24, 0x08, 0x48 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                // Debug version
+                // Windows 8+ specific plugin
+                "Chinese IE 64-bit Plugin (ActiveX)", "Flash64_34_0_0_295.ocx", "34,0,0,295", true, 14691296, new List<HexPatch>() {
+                new HexPatch(
+                    0x161138,
+                    new byte[] { 0x48, 0x89, 0x5C, 0x24, 0x08, 0x57 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+                new HexPatch(
+                    0x24DBF1,
+                    new byte[] { 0x74, 0x28 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x24DBFA,
+                    new byte[] { 0x75, 0x1F },
+                    new byte[] { 0x90, 0x90 }
+                ),
+            }),
+            new PatchableBinary(
+                "Chinese IE 32-bit Plugin (ActiveX)", "Flash32_34_0_0_295.ocx", "34,0,0,295", false, 9976800, new List<HexPatch>() {
+                new HexPatch(
+                    0x261F91,
+                    new byte[] { 0x74, 0x23 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x261F9A,
+                    new byte[] { 0x75, 0x1A },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x295BC9,
+                    new byte[] { 0x55, 0x8B, 0xEC, 0x53, 0x56, 0x8B },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                // Windows 8+ specific plugin
+                "Chinese IE 32-bit Plugin (ActiveX)", "Flash32_34_0_0_295.ocx", "34,0,0,295", false, 11891680, new List<HexPatch>() {
+                new HexPatch(
+                    0x1612B0,
+                    new byte[] { 0x55, 0x8B, 0xEC, 0x56, 0x8B, 0xF1 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+                new HexPatch(
+                    0x23D52B,
+                    new byte[] { 0x74, 0x21 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x23D534,
+                    new byte[] { 0x75, 0x18 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+            }),
+            new PatchableBinary(
+                // Debug version
+                "Chinese IE 32-bit Plugin (ActiveX)", "Flash32_34_0_0_295.ocx", "34,0,0,295", false, 10793440, new List<HexPatch>() {
+                new HexPatch(
+                    0x274540,
+                    new byte[] { 0x74, 0x21 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x274549,
+                    new byte[] { 0x75, 0x18 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x2A97E3,
+                    new byte[] { 0x55, 0x8B, 0xEC, 0x53, 0x56, 0x8B },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                // Debug version
+                // Windows 8+ specific plugin
+                "Chinese IE 32-bit Plugin (ActiveX)", "Flash32_34_0_0_295.ocx", "34,0,0,295", false, 12770272, new List<HexPatch>() {
+                new HexPatch(
+                    0x174F20,
+                    new byte[] { 0x55, 0x8B, 0xEC, 0x56, 0x8B, 0xF1 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+                new HexPatch(
+                    0x25953B,
+                    new byte[] { 0x74, 0x21 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x259544,
+                    new byte[] { 0x75, 0x18 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: PepperFlashPlayer
+                "Chinese Mac 64-bit Chrome Plugin (Pepper)", "34,0,0,295", true, 15301296, new List<HexPatch>() {
+                new HexPatch(
+                    0x56BC09,
+                    new byte[] { 0x74, 0x4A },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x56BC46,
+                    new byte[] { 0x74, 0x0D },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x56BC4F,
+                    new byte[] { 0x0F, 0x84, 0x30, 0x03 },
+                    new byte[] { 0xE9, 0x31, 0x03, 0x00 }
+                ),
+                new HexPatch(
+                    0x56BC54,
+                    new byte[] { 0x00 },
+                    new byte[] { 0x90 }
+                ),
+                new HexPatch(
+                    0x5C9F30,
+                    new byte[] { 0x55, 0x48, 0x89, 0xE5, 0x41, 0x56 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: FlashPlayer-10.6
+                "Chinese Mac 64-bit Firefox Plugin (NPAPI)", "34,0,0,295", true, 16792304, new List<HexPatch>() {
+                new HexPatch(
+                    0x3CA1D9,
+                    new byte[] { 0x74, 0x4A },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x3CA216,
+                    new byte[] { 0x74, 0x0D },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x3CA21F,
+                    new byte[] { 0x0F, 0x84, 0xED, 0x02 },
+                    new byte[] { 0xE9, 0xEE, 0x02, 0x00 }
+                ),
+                new HexPatch(
+                    0x3CA224,
+                    new byte[] { 0x00 },
+                    new byte[] { 0x90 }
+                ),
+                new HexPatch(
+                    0x4B45C0,
+                    new byte[] { 0x55, 0x48, 0x89, 0xE5, 0x41, 0x56 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: flashplayer_sa.exe
+                "Chinese Standalone Flash Player", "34,0,0,295", false, 10735072, new List<HexPatch>() {
+                new HexPatch(
+                    0x62D54,
+                    new byte[] { 0x74, 0x23 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x62D5D,
+                    new byte[] { 0x75, 0x1A },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x1DA01C,
+                    new byte[] { 0x55, 0x8B, 0xEC, 0x56, 0x8B, 0xF1 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: flashplayer_sa_debug.exe
+                "Chinese Standalone Flash Player", "34,0,0,295", false, 11554272, new List<HexPatch>() {
+                new HexPatch(
+                    0x187A43,
+                    new byte[] { 0x74, 0x21 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x187A4C,
+                    new byte[] { 0x75, 0x18 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x326C50,
+                    new byte[] { 0x55, 0x8B, 0xEC, 0x56, 0x8B, 0xF1 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
                 // WARNING: This binary can only be applied using the "Patch File..." option
                 // Filename: FlashPlayer.exe
                 "Adobe Animate Flash Player", "35,0,0,0", true, 13168408, new List<HexPatch>() {
