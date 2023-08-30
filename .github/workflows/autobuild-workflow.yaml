@@ -21,6 +21,7 @@ jobs:
         run: >
           echo ${{ secrets.SIGN_WIN_CERT }} | base64 --decode > cert.pfx
       - name: Sign executable
+        if: ${{ false }}
         shell: powershell
         working-directory: FlashPatch/bin
         run: >
