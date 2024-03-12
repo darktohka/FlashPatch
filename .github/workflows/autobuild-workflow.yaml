@@ -7,7 +7,7 @@ jobs:
     runs-on: windows-2019
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Visual Studio
         uses: ilammy/msvc-dev-cmd@v1
       - name: Build executable
@@ -31,7 +31,7 @@ jobs:
         working-directory: FlashPatch/bin
         run: >
           rm cert.pfx
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: FlashPatch
           path: FlashPatch/bin/FlashPatch.exe
