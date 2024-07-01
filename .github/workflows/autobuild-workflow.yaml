@@ -21,11 +21,10 @@ jobs:
         run: >
           echo ${{ secrets.SIGN_WIN_CERT }} | base64 --decode > cert.pfx
       - name: Sign executable
-        if: ${{ false }}
         shell: powershell
         working-directory: FlashPatch/bin
         run: >
-          signtool sign /a /tr "${{ secrets.SIGN_WIN_TIMESTAMP }}" /td sha256 /fd sha256 /f cert.pfx /p "${{ secrets.SIGN_WIN_PASS }}" FlashPatch.exe
+          signtool sign /a /tr "${{ secrets.SIGN_WIN_TIMESTAMP }}" /td sha256 /fd sha256 /f cert.pfx FlashPatch.exe
       - name: Remove certificate
         shell: bash
         working-directory: FlashPatch/bin
