@@ -37,7 +37,7 @@ It bypasses the January 12th, 2021 killswitch that prevents you from playing any
 | ----------------- | ---------------- | ---------- | ------------------------ | ------------------------ | ------------------------ | ------------------ | ------------------------ |
 | Google Chrome     | PPAPI (Pepper)   | 34.0.0.317 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
 | Mozilla Firefox   | NPAPI (Netscape) | 34.0.0.317 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
-| Safari            | NPAPI (Netscape) | 34.0.0.315 | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark:       | :heavy_check_mark: | :heavy_multiplication_x: |
+| Safari            | NPAPI (Netscape) | 34.0.0.317 | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark:       | :heavy_check_mark: | :heavy_multiplication_x: |
 | Internet Explorer | ActiveX (OCX)    | 34.0.0.317 | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark: | :heavy_check_mark:       |
 
 Old Chinese Flash versions supported:
@@ -81,7 +81,7 @@ Download clean builds of Flash 34.0.0.317:
 
 - [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.43)
 - [For Linux - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.7)
-- [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.42)
+- [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.44)
 
 ## Flash Player
 
