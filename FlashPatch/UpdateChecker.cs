@@ -32,10 +32,10 @@ namespace FlashPatch {
     }
 
     public class UpdateChecker {
-        private static readonly string VERSION = "v1.26.1";
+        private static readonly string VERSION = "v1.27";
         private static readonly string AUTHOR = "darktohka";
         private static readonly string REPO = "FlashPatch";
-        private static readonly string USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
+        private static readonly string USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36";
 
         public static string GetAPILink() {
             return "https://api.github.com/repos/" + AUTHOR + "/" + REPO + "/releases/latest";
