@@ -11565,6 +11565,106 @@ namespace FlashPatch {
             }),
             new PatchableBinary(
                 // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: PepperFlashPlayer
+                "Chinese Mac 64-bit Chrome Plugin (Pepper)", "34,0,0,321", true, 15305440, new List<HexPatch>() {
+                new HexPatch(
+                    0x56CBC9,
+                    new byte[] { 0x74, 0x4C },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x56CC08,
+                    new byte[] { 0x74, 0x0D },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x56CC11,
+                    new byte[] { 0x0F, 0x84, 0x2E, 0x03 },
+                    new byte[] { 0xE9, 0x2F, 0x03, 0x00 }
+                ),
+                new HexPatch(
+                    0x56CC16,
+                    new byte[] { 0x00 },
+                    new byte[] { 0x90 }
+                ),
+                new HexPatch(
+                    0x5CAEF0,
+                    new byte[] { 0x55, 0x48, 0x89, 0xE5, 0x41, 0x56 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: FlashPlayer-10.6
+                "Chinese Mac 64-bit Firefox Plugin (NPAPI)", "34,0,0,321", true, 16792304, new List<HexPatch>() {
+                new HexPatch(
+                    0x3CA1D9,
+                    new byte[] { 0x74, 0x4C },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x3CA218,
+                    new byte[] { 0x74, 0x0D },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x3CA221,
+                    new byte[] { 0x0F, 0x84, 0xEB, 0x02 },
+                    new byte[] { 0xE9, 0xEC, 0x02, 0x00 }
+                ),
+                new HexPatch(
+                    0x3CA226,
+                    new byte[] { 0x00 },
+                    new byte[] { 0x90 }
+                ),
+                new HexPatch(
+                    0x4B45C0,
+                    new byte[] { 0x55, 0x48, 0x89, 0xE5, 0x41, 0x56 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: flashplayer_sa.exe
+                "Chinese Standalone Flash Player", "34,0,0,321", false, 10735024, new List<HexPatch>() {
+                new HexPatch(
+                    0x62C86,
+                    new byte[] { 0x74, 0x23 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x62C8F,
+                    new byte[] { 0x75, 0x1A },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x1DA075,
+                    new byte[] { 0x55, 0x8B, 0xEC, 0x56, 0x8B, 0xF1 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
+                // Filename: flashplayer_sa_debug.exe
+                "Chinese Standalone Flash Player", "34,0,0,321", false, 11554736, new List<HexPatch>() {
+                new HexPatch(
+                    0x187A45,
+                    new byte[] { 0x74, 0x21 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x187A4E,
+                    new byte[] { 0x75, 0x18 },
+                    new byte[] { 0x90, 0x90 }
+                ),
+                new HexPatch(
+                    0x326C36,
+                    new byte[] { 0x55, 0x8B, 0xEC, 0x56, 0x8B, 0xF1 },
+                    new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 }
+                ),
+            }),
+            new PatchableBinary(
+                // WARNING: This binary can only be applied using the "Patch File..." option
                 // Filename: FlashPlayer.exe
                 "Adobe Animate Flash Player", "35,0,0,0", true, 13168408, new List<HexPatch>() {
                 new HexPatch(
