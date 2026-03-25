@@ -4,10 +4,10 @@ on: [push, repository_dispatch, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-2022
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Setup Visual Studio
         uses: ilammy/msvc-dev-cmd@v1
       - name: Build executable
@@ -30,7 +30,7 @@ jobs:
         working-directory: FlashPatch/bin
         run: >
           rm cert.pfx
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: FlashPatch
           path: FlashPatch/bin/FlashPatch.exe
