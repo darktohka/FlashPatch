@@ -12,7 +12,7 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
       - name: Install .NET Framework 4.5 Developer Pack
         run: |
-          choco install netfx-4.5-devpack -y
+          choco install netfx-4.5.2-devpack -y
       - name: Build executable
         shell: powershell
         working-directory: FlashPatch
