@@ -35,13 +35,14 @@ It bypasses the January 12th, 2021 killswitch that prevents you from playing any
 
 | Browser           | Plugin API       | Version    | Windows                  | Linux                    | Mac                      | 64-bit             | 32-bit                   |
 | ----------------- | ---------------- | ---------- | ------------------------ | ------------------------ | ------------------------ | ------------------ | ------------------------ |
-| Google Chrome     | PPAPI (Pepper)   | 34.0.0.330 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
-| Mozilla Firefox   | NPAPI (Netscape) | 34.0.0.330 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
-| Safari            | NPAPI (Netscape) | 34.0.0.330 | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark:       | :heavy_check_mark: | :heavy_multiplication_x: |
-| Internet Explorer | ActiveX (OCX)    | 34.0.0.330 | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark: | :heavy_check_mark:       |
+| Google Chrome     | PPAPI (Pepper)   | 34.0.0.376 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
+| Mozilla Firefox   | NPAPI (Netscape) | 34.0.0.376 | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
+| Safari            | NPAPI (Netscape) | 34.0.0.376 | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark:       | :heavy_check_mark: | :heavy_multiplication_x: |
+| Internet Explorer | ActiveX (OCX)    | 34.0.0.376 | :heavy_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_check_mark: | :heavy_check_mark:       |
 
 Old Chinese Flash versions supported:
 
+- Version 34.0.0.330
 - Version 34.0.0.325
 - Version 34.0.0.323
 - Version 34.0.0.321
@@ -81,11 +82,11 @@ FlashPatch provides the following patches for this version:
 - Patch Chinese Enterprise phone-home service
 - Patch activation check
 
-Download clean builds of Flash 34.0.0.330:
+Download clean builds of Flash 34.0.0.376:
 
-- [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.52)
+- [For Windows - Chrome/Firefox/IE](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.54)
 - [For Linux - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.7)
-- [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.51)
+- [For Mac - Chrome/Firefox](https://github.com/darktohka/clean-flash-builds/releases/tag/v1.53)
 
 ## Flash Player
 
