@@ -148,8 +148,8 @@ pub fn start_gui() {
             log_view.select_all();
         }
 
-        // Button states
-        let buttons_enabled = current_state == AppState::Idle;
+        // Button states: only disable while an active patch job is running.
+        let buttons_enabled = current_state != AppState::Patching;
         patch_btn.enabled = buttons_enabled && cfg!(target_os = "windows");
         patch_file_btn.enabled = buttons_enabled;
 
@@ -211,7 +211,7 @@ fn open_url(url: &str) -> std::io::Result<()> {
 fn start_system_patch(state: Arc<Mutex<AppState>>, log: LogCallback) {
     {
         let mut s = state.lock().unwrap();
-        if *s != AppState::Idle {
+        if *s == AppState::Patching {
             return;
         }
         *s = AppState::Patching;
@@ -330,7 +330,7 @@ fn start_file_patch(state: Arc<Mutex<AppState>>, log: LogCallback) {
 
     {
         let mut s = state.lock().unwrap();
-        if *s != AppState::Idle {
+        if *s == AppState::Patching {
             return;
         }
         *s = AppState::Patching;
