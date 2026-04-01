@@ -27,7 +27,8 @@ jobs:
             libxi-dev \
             libxcursor-dev \
             libxinerama-dev \
-            libgl1-mesa-dev
+            libgl1-mesa-dev \
+            upx
 
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
@@ -39,6 +40,9 @@ jobs:
 
       - name: Build
         run: cargo build --profile release-lto --target x86_64-unknown-linux-gnu
+
+      - name: Pack binary with UPX
+        run: upx --best --lzma target/x86_64-unknown-linux-gnu/release-lto/flashpatch
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
@@ -54,6 +58,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
+      - name: Install UPX
+        run: brew install upx
+
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
@@ -64,6 +71,9 @@ jobs:
 
       - name: Build
         run: cargo build --profile release-lto --target x86_64-apple-darwin
+
+      - name: Pack binary with UPX
+        run: upx --best --lzma target/x86_64-apple-darwin/release-lto/flashpatch
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
@@ -79,6 +89,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
+      - name: Install UPX
+        run: choco install upx -y
+
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
@@ -89,6 +102,9 @@ jobs:
 
       - name: Build
         run: cargo build --profile release-lto --target x86_64-pc-windows-msvc
+
+      - name: Pack binary with UPX
+        run: upx --best --lzma target/x86_64-pc-windows-msvc/release-lto/flashpatch.exe
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
@@ -104,6 +120,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
+      - name: Install UPX
+        run: choco install upx -y
+
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
@@ -114,6 +133,9 @@ jobs:
 
       - name: Build
         run: cargo build --profile release-lto --target i686-pc-windows-msvc
+
+      - name: Pack binary with UPX
+        run: upx --best --lzma target/i686-pc-windows-msvc/release-lto/flashpatch.exe
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
