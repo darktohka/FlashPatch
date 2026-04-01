@@ -2,6 +2,7 @@ use anyhow::{bail, Context, Result};
 use capstone::prelude::*;
 use capstone::Insn;
 use goblin::Object;
+use goblin::pe;
 use std::collections::HashMap;
 use std::sync::Arc;
 
@@ -145,7 +146,27 @@ fn resolve_elf_imports(data: &[u8], elf: &goblin::elf::Elf<'_>) -> HashMap<Strin
 
 /// Parse a binary with goblin and collect section info.
 fn parse_binary(data: &[u8], cb: &LogCallback) -> Result<BinaryInfo> {
-    match Object::parse(data)? {
+    // Try standard parsing first; if it fails on a PE binary (e.g. malformed
+    // certificate table in older Flash builds), retry with permissive options.
+    let obj = match Object::parse(data) {
+        Ok(o) => o,
+        Err(e) => {
+            // Check if it looks like a PE
+            let hint_bytes: [u8; 16] = data.get(..16)
+                .and_then(|s| s.try_into().ok())
+                .unwrap_or([0u8; 16]);
+            if matches!(goblin::peek_bytes(&hint_bytes), Ok(goblin::Hint::PE)) {
+                plog!(cb, "  Standard PE parse failed ({}), retrying permissive...", e);
+                let mut opts = pe::options::ParseOptions::default();
+                opts.parse_attribute_certificates = false;
+                opts.parse_mode = goblin::options::ParseMode::Permissive;
+                Object::PE(pe::PE::parse_with_opts(data, &opts)?)
+            } else {
+                return Err(e.into());
+            }
+        }
+    };
+    match obj {
         Object::Elf(elf) => {
             let arch = if elf.is_64 { Arch::X64 } else { Arch::X86 };
             let sections: Vec<Section> = elf
@@ -344,6 +365,71 @@ fn parse_binary(data: &[u8], cb: &LogCallback) -> Result<BinaryInfo> {
                 let iat_va = image_base + import.offset as u64;
                 imports.insert(import.name.to_string(), iat_va);
             }
+
+            // Also parse delay-load imports (data directory #13), which
+            // goblin does not resolve.  The delay-import descriptor is 32
+            // bytes: grAttrs(4) rvaDLLName(4) rvaHmod(4) rvaIAT(4)
+            //        rvaINT(4) rvaBoundIAT(4) rvaUnloadIAT(4) dwTimeStamp(4)
+            if let Some(opt) = pe.header.optional_header {
+                if let Some(&dd) = opt.data_directories.get_delay_import_descriptor() {
+                    let thunk_size: usize = if pe.is_64 { 8 } else { 4 };
+                    let ordinal_flag: u64 = if pe.is_64 { 0x8000_0000_0000_0000 } else { 0x8000_0000 };
+                    let mut pos = dd.virtual_address;
+                    loop {
+                        let Some(desc_off) = rva_to_file_offset(&sections, image_base, pos) else { break };
+                        if desc_off + 32 > data.len() { break; }
+                        let attrs    = u32::from_le_bytes(data[desc_off..desc_off+4].try_into().unwrap());
+                        let rva_name = u32::from_le_bytes(data[desc_off+4..desc_off+8].try_into().unwrap());
+                        let rva_iat  = u32::from_le_bytes(data[desc_off+12..desc_off+16].try_into().unwrap());
+                        let rva_int  = u32::from_le_bytes(data[desc_off+16..desc_off+20].try_into().unwrap());
+                        // Null descriptor terminates the list
+                        if rva_name == 0 && rva_iat == 0 { break; }
+                        // grAttrs: 1 = RVA-based (modern linkers), 0 = VA-based (legacy)
+                        let is_rva = attrs & 1 != 0;
+                        let to_rva = |raw: u32| -> u32 {
+                            if is_rva { raw } else { raw.wrapping_sub(image_base as u32) }
+                        };
+                        let int_rva = to_rva(rva_int);
+                        let iat_rva = to_rva(rva_iat);
+                        if let Some(mut int_off) = rva_to_file_offset(&sections, image_base, int_rva) {
+                            let mut idx: usize = 0;
+                            loop {
+                                if int_off + thunk_size > data.len() { break; }
+                                let thunk: u64 = if thunk_size == 8 {
+                                    u64::from_le_bytes(data[int_off..int_off+8].try_into().unwrap())
+                                } else {
+                                    u32::from_le_bytes(data[int_off..int_off+4].try_into().unwrap()) as u64
+                                };
+                                if thunk == 0 { break; }
+                                if thunk & ordinal_flag == 0 {
+                                    // Import by name: thunk is RVA to (hint:u16, name:cstr)
+                                    let hint_rva = (thunk & 0x7FFF_FFFF) as u32;
+                                    if let Some(hint_off) = rva_to_file_offset(&sections, image_base, hint_rva) {
+                                        if hint_off + 3 <= data.len() {
+                                            // Skip 2-byte hint, read null-terminated name
+                                            let name_start = hint_off + 2;
+                                            let name_end = data[name_start..].iter()
+                                                .position(|&b| b == 0)
+                                                .map(|p| name_start + p)
+                                                .unwrap_or(data.len().min(name_start + 256));
+                                            if let Ok(func_name) = std::str::from_utf8(&data[name_start..name_end]) {
+                                                if !func_name.is_empty() {
+                                                    let entry_va = image_base + iat_rva as u64 + (idx * thunk_size) as u64;
+                                                    imports.entry(func_name.to_string()).or_insert(entry_va);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                int_off += thunk_size;
+                                idx += 1;
+                            }
+                        }
+                        pos += 32;
+                    }
+                }
+            }
+
             if !imports.is_empty() {
                 plog!(cb, "  Resolved {} PE imports", imports.len());
             }
@@ -2557,27 +2643,29 @@ fn patch_wincrypt_cert_time_check(
     let mut patched_count = 0;
 
     for call_va in &xrefs {
-        plog!(cb, "  Call site at {:#x}", call_va);
+        plog!(cb, "  Ref at {:#x}", call_va);
 
         let call_off = match va_to_file_offset(&info.sections, *call_va) {
             Some(off) => off,
             None => continue,
         };
 
-        // Scan backward up to 30 bytes from the call for the pdwFlags
-        // initialization: `mov dword ptr [rbp/rsp+disp], VALUE` where
-        // VALUE has CERT_STORE_TIME_VALIDITY_FLAG (0x02) set.
+        // Scan for the pdwFlags initialization:
+        //   `mov dword ptr [rbp/rsp+disp], VALUE`
+        // where VALUE has CERT_STORE_TIME_VALIDITY_FLAG (0x02) set.
+        //
+        // For direct `call [IAT_addr]` the mov is BEFORE the call (scan backward).
+        // For register-indirect `mov edi,[IAT]; ... call edi` the mov is AFTER
+        // the IAT load (scan forward), since the flag init is part of the call
+        // setup that follows the register load.
         //
         // Encodings handled:
         //   C7 45 dd VV 00 00 00          - mov [rbp+disp8], imm32  (7 bytes, imm at +3)
         //   C7 85 dd dd dd dd VV 00 00 00 - mov [rbp+disp32], imm32 (10 bytes, imm at +6)
         //   C7 44 24 dd VV 00 00 00       - mov [rsp+disp8], imm32  (8 bytes, imm at +4)
         //   C7 84 24 dd dd dd dd VV 00 00 00 - mov [rsp+disp32], imm32 (11 bytes, imm at +7)
-        let scan_start = call_off.saturating_sub(30);
-        let wlen = call_off - scan_start;
-        let mut found = false;
 
-        // Try each MOV encoding, scanning the 30-byte window before the call.
+        // Try each MOV encoding, scanning the window around the reference.
         // Each tuple: (modrm_prefix bytes to match, imm offset from pattern start)
         let patterns: &[(&[u8], usize)] = &[
             (&[0xC7, 0x45], 3),            // mov [rbp+disp8], imm32 (7 bytes)
@@ -2586,12 +2674,18 @@ fn patch_wincrypt_cert_time_check(
             (&[0xC7, 0x84, 0x24], 7),      // mov [rsp+disp32], imm32 (11 bytes)
         ];
 
-        'outer: for &(prefix, imm_off) in patterns {
+        // Scan backward (30 bytes) then forward (120 bytes) from the reference.
+        let scan_start = call_off.saturating_sub(30);
+        let scan_end = (call_off + 120).min(data.len());
+        let scan_len = scan_end - scan_start;
+        let count_before = patched_count;
+
+        for &(prefix, imm_off) in patterns {
             let total_len = imm_off + 4; // imm32 is 4 bytes
-            if wlen < total_len {
+            if scan_len < total_len {
                 continue;
             }
-            for i in 0..=wlen - total_len {
+            for i in 0..=scan_len - total_len {
                 let base = scan_start + i;
                 if &data[base..base + prefix.len()] != prefix {
                     continue;
@@ -2610,14 +2704,12 @@ fn patch_wincrypt_cert_time_check(
                         mov_va, old_val, data[imm_pos]
                     );
                     patched_count += 1;
-                    found = true;
-                    break 'outer;
                 }
             }
         }
 
-        if !found {
-            plog!(cb, "    WARNING: Could not find pdwFlags initialization before call.");
+        if patched_count == count_before {
+            plog!(cb, "    WARNING: Could not find pdwFlags initialization near ref.");
         }
     }
 
