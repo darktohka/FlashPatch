@@ -1,0 +1,37 @@
+[package]
+name = "flashpatch"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+capstone = "0.14"
+goblin = "0.10"
+memmap2 = "0.9"
+anyhow = "1"
+minifb = "0.28"
+ab_glyph = "0.2"
+rfd = "0.15"
+arboard = "3"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_Security_Authorization",
+    "Win32_System_Threading",
+    "Win32_System_Registry",
+    "Win32_System_SystemInformation",
+    "Win32_System_Services",
+    "Win32_Storage_FileSystem",
+] }
+winapi = { version = "0.3", features = ["winnt", "processthreadsapi", "securitybaseapi", "winbase", "handleapi", "errhandlingapi", "winsvc"] }
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+debug = false
+
+[profile."release-lto"]
+inherits = "release"
+lto = "fat"
+strip = true

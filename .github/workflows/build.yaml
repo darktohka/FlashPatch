@@ -1,0 +1,108 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  repository_dispatch:
+
+jobs:
+  build-linux:
+    name: Build FlashPatch (Linux)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-unknown-linux-gnu
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+
+      - name: Build
+        run: cargo build --profile release-lto --target x86_64-unknown-linux-gnu
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: flashpatch-linux
+          path: target/x86_64-unknown-linux-gnu/release-lto/flashpatch
+
+  build-macos:
+    name: Build FlashPatch (macOS)
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-apple-darwin
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+
+      - name: Build
+        run: cargo build --profile release-lto --target x86_64-apple-darwin
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: flashpatch-macos
+          path: target/x86_64-apple-darwin/release-lto/flashpatch
+
+  build-windows-64:
+    name: Build FlashPatch (Windows x64)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+
+      - name: Build
+        run: cargo build --profile release-lto --target x86_64-pc-windows-msvc
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: flashpatch-windows
+          path: target/x86_64-pc-windows-msvc/release-lto/flashpatch.exe
+
+  build-windows-32:
+    name: Build FlashPatch (Windows x86)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: i686-pc-windows-msvc
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+
+      - name: Build
+        run: cargo build --profile release-lto --target i686-pc-windows-msvc
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: flashpatch-windows-32
+          path: target/i686-pc-windows-msvc/release-lto/flashpatch.exe
