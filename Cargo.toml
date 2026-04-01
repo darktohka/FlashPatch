@@ -26,6 +26,9 @@ windows-sys = { version = "0.61", features = [
 ] }
 winapi = { version = "0.3", features = ["winnt", "processthreadsapi", "securitybaseapi", "winbase", "handleapi", "errhandlingapi", "winsvc"] }
 
+[build-dependencies]
+winresource = "0.1"
+
 [profile.release]
 opt-level = 3
 codegen-units = 1
