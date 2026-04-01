@@ -58,9 +58,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Install UPX
-        run: brew install upx
-
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
@@ -71,9 +68,6 @@ jobs:
 
       - name: Build
         run: cargo build --profile release-lto --target x86_64-apple-darwin
-
-      - name: Pack binary with UPX
-        run: upx --best --lzma target/x86_64-apple-darwin/release-lto/flashpatch
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
