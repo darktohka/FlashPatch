@@ -10,7 +10,7 @@ memmap2 = "0.9"
 anyhow = "1"
 minifb = "0.28"
 ab_glyph = "0.2"
-rfd = "0.15"
+rfd = "0.17"
 arboard = "3"
 
 [target.'cfg(windows)'.dependencies]
@@ -24,6 +24,7 @@ windows-sys = { version = "0.61", features = [
     "Win32_System_Services",
     "Win32_Storage_FileSystem",
     "Win32_UI_HiDpi",
+    "Win32_UI_WindowsAndMessaging"
 ] }
 winapi = { version = "0.3", features = ["winnt", "processthreadsapi", "securitybaseapi", "winbase", "handleapi", "errhandlingapi", "winsvc"] }
 
