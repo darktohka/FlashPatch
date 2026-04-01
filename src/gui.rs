@@ -20,6 +20,13 @@ const BG_COLOR: u32 = Renderer::rgb(30, 30, 30);
 const WHITE: u32 = Renderer::rgb(255, 255, 255);
 const LINK_COLOR: u32 = Renderer::rgb(100, 160, 255);
 
+/// Scale an integer coordinate by the DPI scale factor.
+#[inline]
+fn s(v: i32, scale: f32) -> i32 { (v as f32 * scale).round() as i32 }
+/// Scale a float value (font sizes, spacing) by the DPI scale factor.
+#[inline]
+fn sf(v: f32, scale: f32) -> f32 { v * scale }
+
 /// Application state shared with the patching thread.
 #[derive(Clone, Copy, PartialEq, Eq)]
 enum AppState {
@@ -29,10 +36,15 @@ enum AppState {
 }
 
 pub fn start_gui() {
+    // Query DPI before creating the window so we can size everything correctly.
+    let scale = platform::get_dpi_scale();
+    let phys_w = (WIN_WIDTH as f32 * scale).round() as usize;
+    let phys_h = (WIN_HEIGHT as f32 * scale).round() as usize;
+
     let mut window = Window::new(
         WINDOW_TITLE,
-        WIN_WIDTH,
-        WIN_HEIGHT,
+        phys_w,
+        phys_h,
         WindowOptions {
             resize: false,
             ..WindowOptions::default()
@@ -41,18 +53,20 @@ pub fn start_gui() {
     .expect("Failed to create window");
     window.set_target_fps(30);
 
-    let fonts = FontManager::new();
-    let mut renderer = Renderer::new(WIN_WIDTH, WIN_HEIGHT);
+    platform::set_window_icon(&window);
 
-    // --- Layout ---
-    let center_x = WIN_WIDTH as i32 / 2;
+    let fonts = FontManager::new();
+    let mut renderer = Renderer::new(phys_w, phys_h);
+
+    // --- Layout (all coordinates scaled to physical pixels) ---
+    let center_x = phys_w as i32 / 2;
 
     // Title
     let title_label = Label {
-        rect: widgets::Rect::new(center_x, 18, 0, 0),
+        rect: widgets::Rect::new(center_x, s(18, scale), 0, 0),
         text: "FlashPatch!".to_string(),
         color: WHITE,
-        font_size: 38.0,
+        font_size: sf(38.0, scale),
         line_spacing: 0.0,
         visible: true,
         max_width: 0.0,
@@ -60,10 +74,10 @@ pub fn start_gui() {
     };
 
     let version_label = Label {
-        rect: widgets::Rect::new(center_x + 105, 37, 0, 0),
+        rect: widgets::Rect::new(center_x + s(105, scale), s(37, scale), 0, 0),
         text: VERSION.to_string(),
         color: WHITE,
-        font_size: 20.0,
+        font_size: sf(20.0, scale),
         line_spacing: 0.0,
         visible: true,
         max_width: 0.0,
@@ -72,27 +86,29 @@ pub fn start_gui() {
 
     // Description
     let desc_label = Label {
-        rect: widgets::Rect::new(center_x, 68, 0, 0),
+        rect: widgets::Rect::new(center_x, s(68, scale), 0, 0),
         text: "Play Adobe Flash Player games in the\nbrowser after January 12th, 2021.".to_string(),
         color: Renderer::rgb(200, 200, 200),
-        font_size: 16.0,
-        line_spacing: 2.0,
+        font_size: sf(16.0, scale),
+        line_spacing: sf(2.0, scale),
         visible: true,
         max_width: 0.0,
         centered: true,
     };
 
     // Buttons
-    let mut patch_btn = GradientButton::new(center_x - 115, 120, 100, 42, "Patch");
-    let mut patch_file_btn = GradientButton::new(center_x + 15, 120, 100, 42, "Patch File...");
-    patch_file_btn.font_size = 14.0;
+    let mut patch_btn = GradientButton::new(center_x - s(115, scale), s(120, scale), s(100, scale), s(42, scale), "Patch");
+    patch_btn.font_size = sf(16.0, scale);
+    let mut patch_file_btn = GradientButton::new(center_x + s(15, scale), s(120, scale), s(100, scale), s(42, scale), "Patch File...");
+    patch_file_btn.font_size = sf(14.0, scale);
 
     // Link label
-    let mut link_label = Label::new(center_x - 85, 172, "by darktohka - GitHub", 14.0);
+    let mut link_label = Label::new(center_x - s(85, scale), s(172, scale), "by darktohka - GitHub", sf(14.0, scale));
     link_label.color = LINK_COLOR;
 
     // Log view (sized for the full window; invisible until patching starts)
-    let mut log_view = LogView::new(10, 198, WIN_WIDTH as i32 - 20, WIN_HEIGHT as i32 - 208);
+    let mut log_view = LogView::new(s(10, scale), s(198, scale), phys_w as i32 - s(20, scale), phys_h as i32 - s(208, scale));
+    log_view.font_size = sf(14.0, scale);
 
     // Shared state
     let state = Arc::new(Mutex::new(AppState::Idle));
@@ -185,7 +201,7 @@ pub fn start_gui() {
         log_view.draw(&mut renderer, &fonts);
 
         window
-            .update_with_buffer(&renderer.buffer, WIN_WIDTH, WIN_HEIGHT)
+            .update_with_buffer(&renderer.buffer, phys_w, phys_h)
             .unwrap();
     }
 }

@@ -2,6 +2,46 @@
 
 use std::path::PathBuf;
 
+/// Query the system DPI scale factor.
+///
+/// On Windows the process manifest declares per-monitor-v2 DPI awareness, so
+/// `GetDpiForSystem` returns the real hardware DPI.  We divide by the 96 DPI
+/// baseline to get a scale factor (e.g. 1.5 at 144 DPI).
+///
+/// On other platforms we return 1.0 (no scaling).
+pub fn get_dpi_scale() -> f32 {
+    #[cfg(target_os = "windows")]
+    {
+        let dpi = unsafe { windows_sys::Win32::UI::HiDpi::GetDpiForSystem() };
+        if dpi == 0 { 1.0 } else { dpi as f32 / 96.0 }
+    }
+    #[cfg(not(target_os = "windows"))]
+    { 1.0 }
+}
+
+
+/// Set the window icon from the icon resource already embedded in the binary
+/// by `winresource` (resource ID 1). No-op on non-Windows platforms.
+pub fn set_window_icon(window: &minifb::Window) {
+    #[cfg(target_os = "windows")]
+    unsafe {
+        use windows_sys::Win32::System::LibraryLoader::GetModuleHandleW;
+        use windows_sys::Win32::UI::WindowsAndMessaging::{
+            LoadImageW, SendMessageW, ICON_BIG, ICON_SMALL, IMAGE_ICON, LR_DEFAULTSIZE,
+            WM_SETICON,
+        };
+
+        let hwnd = window.get_window_handle(); // *mut c_void
+        let hmodule = GetModuleHandleW(std::ptr::null());
+        // MAKEINTRESOURCEW(1): load the icon embedded by winresource as resource ID 1.
+        let icon = LoadImageW(hmodule, 1 as *const u16, IMAGE_ICON, 0, 0, LR_DEFAULTSIZE);
+        if !icon.is_null() {
+            SendMessageW(hwnd, WM_SETICON, ICON_BIG as usize, icon as isize);
+            SendMessageW(hwnd, WM_SETICON, ICON_SMALL as usize, icon as isize);
+        }
+    }
+}
+
 /// Information about a discovered Flash Player binary on the system.
 #[derive(Debug, Clone)]
 pub struct FlashBinary {
